@@ -8,3 +8,10 @@ var config = {
   messagingSenderId: "942714245613"
 };
 firebase.initializeApp(config);
+
+var database = firebase.database
+
+//when click on movie, go to fandango and pull movies
+	// go to yelp and pull restaurants
+//when click on events, go to eventbrite and pull events
+	// go to yelp and pull restaurants

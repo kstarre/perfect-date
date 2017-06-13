@@ -1,3 +1,16 @@
 body {
-	background-color: #333333
+    background-color: #333333;
+    color: white;
+}
+
+#leftImage {
+    height: 100%;
+    -webkit-filter: brightness(33%);
+    transition: -webkit-filter 1s, box-shadow 1s;
+    transition-timing-function: ease-in;
+}
+
+#leftImage:hover {
+    -webkit-filter: brightness(100%);
+    box-shadow: 5px 5px 5px 5px white;
 }

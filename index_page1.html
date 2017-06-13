@@ -4,23 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Perfect Date</title>
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" text="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" text="text/css" href="assets/css/style.css">
-    
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
     <!-- jQuery -->
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.min.js"
-      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -30,19 +24,15 @@
             <!--Top Header For Logo-->
             <div class="row">
                 <div class="col-md-4"></div>
-                <div class="col-md-2"> 
-					<img src="assets/images/perfectDate_mainLogo.png">
+                <div class="col-md-2">
+                    <img id="headerLogo" src="assets/images/perfectDate_mainLogo.png">
                 </div>
                 <div class="col-md-4"></div>
             </div>
             <!--Animated Images for Home Screen -->
             <div class="row" id="loadImages">
-                <div class="col-md-6">
-                	<img id="leftImage" src="assets/images/theater_mainImage.png">
-                </div>
-                <div class="col-md-6">
-                	<img id="rightImage" src="assets/images/concertEvent_mainImage.png">
-            	</div>
+                <img id="leftImage" src="assets/images/theater_mainImage.png">
+                <img id="rightImage" src="assets/images/concertEvent_mainImage.png">
             </div>
             <!--Main Page After Click Event-->
             <!--Navigation Bar-->
@@ -120,12 +110,10 @@
         </div>
         <div class="col-md-1"></div>
     </div>
-
     <!-- Greensock script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
     <script src="assets/javascript/app.js"></script>
     <script src="assets/javascript/animation.js"></script>
-
 </body>
 
 </html>

@@ -3,14 +3,35 @@ body {
     color: white;
 }
 
-#leftImage {
-    height: 100%;
+/*Both Main Images*/
+#leftImage,
+#rightImage {
     -webkit-filter: brightness(33%);
-    transition: -webkit-filter 1s, box-shadow 1s;
+    transition: -webkit-filter 0.5s;
     transition-timing-function: ease-in;
+    display: inline-block;
+}
+
+#leftImage {
+    float: left;
+    width: 50%;
+}
+
+#rightImage {
+    float: left;
+    width: 50%;
 }
 
 #leftImage:hover {
     -webkit-filter: brightness(100%);
-    box-shadow: 5px 5px 5px 5px white;
+}
+
+#rightImage:hover {
+    -webkit-filter: brightness(100%);
+}
+
+/* Main Logo */
+#headerLogo {
+    width: 150px;
+    margin: 0 auto;
 }

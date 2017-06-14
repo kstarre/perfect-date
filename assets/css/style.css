@@ -1,0 +1,52 @@
+body {
+    background-color: #333333;
+    color: white;
+}
+
+/*Both Main Images*/
+#leftImage,
+#rightImage {
+    -webkit-filter: brightness(33%);
+    transition: -webkit-filter 0.5s;
+    transition-timing-function: ease-in;
+    display: inline-block;
+    z-index: 1;
+}
+
+#leftImage {
+    float: left;
+    width: 50%;
+}
+
+#rightImage {
+    float: left;
+    width: 50%;
+}
+
+#leftImage:hover {
+    -webkit-filter: brightness(100%);
+}
+
+#rightImage:hover {
+    -webkit-filter: brightness(100%);
+}
+
+/* Main Logo */
+#headerLogo {
+	position: absolute;
+	left: 50%;
+	top: 20%;
+	transform: translate(-50%, -50%);
+    width: 35%;
+    z-index: 2;
+}
+
+/*Opening Page*/
+#openingPage {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 3;
+}

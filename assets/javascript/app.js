@@ -8,3 +8,20 @@ var config = {
   messagingSenderId: "942714245613"
 };
 firebase.initializeApp(config);
+
+//Event Brite API
+
+
+<script>
+
+var queryURL = "https://www.eventbriteapi.com/v3/events/search/?token=WJ5ZSOV6TV56IC44E7EJ&location.address=Cleveland";
+
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+
+  }).done(function (event) {
+    //full object
+    console.log(event);
+
+  });

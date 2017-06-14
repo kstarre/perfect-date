@@ -4,23 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Perfect Date</title>
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link text="text/css" href="assets/css/reset.css">
-    <link text="text/css" href="assets/css/style.css">
-    
+    <link rel="stylesheet" text="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" text="text/css" href="assets/css/style.css">
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
     <!-- jQuery -->
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.min.js"
-      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -28,47 +22,17 @@
         <div class="col-md-1"></div>
         <div class="col-md-10">
             <!--Top Header For Logo-->
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-2" id="logo"><img src='images/perfect_date_logo.png' alt="Perfect Date Logo"/></div>
-                <div class="col-md-4"></div>
-            </div>
-            <!--Animated Images for Home Screen -->
-            <div class="row" id="loadImages">
-                <div class="col-md-6" id="leftImage"><img src="http://lorempixel.com/400/200" alt='leftImage'/></div>
-                <div class="col-md-6" id="rightImage"><img src="http://lorempixel.com/400/200" alt='rightImage'/></div>
-            </div>
-            <!--Main Page After Click Event-->
-            <!--Navigation Bar-->
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href=""> Logo Goes Here
-                            <img src="#" width="128px">
-                        </a>
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                        </ul>
-                        <form class="navbar-form navbar-right">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search">
-                            </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
-                        </form>
-                    </div>
-                    <!-- /.navbar-collapse -->
+            <div id="openingPage">
+                <img id="headerLogo" src="assets/images/Perfect_Date_Logo_web.png" alt="Perfect Date Logo" />
+                <!--Animated Images for Home Screen -->
+                <div class="col-md-12" id="loadImages">
+                    <img id="leftImage" src="assets/images/theater_mainImage.png" alt="Theater Image">
+                    <h2 id='movie-text'>Movie</h2>
+                    <img id="rightImage" src="assets/images/concertEvent_mainImage.png" alt="Event Image">
+                    <h2 id='movie-text'>Movie</h2>
                 </div>
-                <!-- /.container-fluid -->
-            </nav>
+            </div>
+            
             <!--Movie/Event Form and Display-->
             <div class="row">
                 <div class="col-md-6">
@@ -105,21 +69,29 @@
                     </div>
                 </div>
             </div>
-            <!--Footer -->
+            <!--restaurant div -->
             <div class="row">
                 <div class="container-fluid">
-                    <div class="col-md-12">Footer</div>
+                    <div class="col-md-12" id='restaurants'>
+                        This is the restaurants div
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-1"></div>
     </div>
-
+    <!--Footer -->
+    <div class="row">
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <p>This is a Perfect Date Production</p>
+                <p>KSNSJSNM&copy; 2017</p>
+            </div>
+        </div>
+    </div>
     <!-- Greensock script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
     <script src="assets/javascript/app.js"></script>
     <script src="assets/javascript/animation.js"></script>
-
 </body>
 
 </html>

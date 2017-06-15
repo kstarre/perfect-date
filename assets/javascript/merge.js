@@ -1,4 +1,4 @@
-// Initialize Firebase
+// Katie Starrett Firebase
 var config = {
   apiKey: "AIzaSyDwcSHlUcGR-WkLGizclGzfFnnig98aBew",
   authDomain: "perfect-date-82efd.firebaseapp.com",
@@ -11,12 +11,7 @@ firebase.initializeApp(config);
 
 var database = firebase.database
 
-//when click on movie, go to fandango and pull movies
-	// go to yelp and pull restaurants
-//when click on events, go to eventbrite and pull events
-	// go to yelp and pull restaurants
-
-// ajax
+// ajax for movies
 $(window).on("load", function() {
 	var queryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=2017-06-13&zip=44131" + "&api_key=6n4cata848e7z3fha7nkgb77";
 
@@ -43,4 +38,15 @@ $(window).on("load", function() {
 
 });
 
+// Event Brite API
+var queryURL = "https://www.eventbriteapi.com/v3/events/search/?token=WJ5ZSOV6TV56IC44E7EJ&location.address=Cleveland";
 
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+
+  }).done(function (event) {
+    //full object
+    console.log(event);
+
+  });

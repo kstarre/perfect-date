@@ -12,6 +12,7 @@ body {
     transition-timing-function: ease-in;
     display: inline-block;
     z-index: 1;
+    position: relative;
 }
 
 #leftImage {
@@ -26,10 +27,12 @@ body {
 
 #leftImage:hover {
     -webkit-filter: brightness(100%);
+    z-index: 2;
 }
 
 #rightImage:hover {
     -webkit-filter: brightness(100%);
+    z-index: 2;
 }
 
 
@@ -41,7 +44,7 @@ body {
     top: 35%;
     transform: translate(-50%, -50%);
     width: 35%;
-    z-index: 2;
+    z-index: 4;
 }
 
 
@@ -57,17 +60,18 @@ body {
 }
 
 .textAbovePerfectButton {
-    z-index: 2;
+    z-index: 4;
     position: absolute;
     left: 50%;
     top: 70%;
     transform: translate(-50%, -50%);
     font-family: 'Comfortaa';
     font-size: 14px;
+    color: white;
 }
 
 #perfectButton {
-    z-index: 2;
+    z-index: 4;
     position: absolute;
     left: 50%;
     top: 75%;

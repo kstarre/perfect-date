@@ -23,50 +23,52 @@ code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13
 </head>
 
 <body>
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            Top Header For Logo-->
-            <div id="openingPage">
-                <img id="headerLogo" src="assets/images/Perfect_Date_Logo.png">
-                <!--Perfect My Date-->
-             <p class="textAbovePerfectButton">Let us set up your Perfect Date <3></p>
-                <button type="button" id="perfectButton" class="btn btn-default">Perfect My Date!</button>
-                <!--Animated Images for Home Screen -->
-            <div class="col-md-12" id="loadImages">
-                    <img id="leftImage" src="assets/images/theater_mainImage.png">
-                    <img id="rightImage" src="assets/images/concertEvent_mainImage.png">
-                    
-            </div> 
+    <div class="container-fluid">
+        Top Header For Logo-->
+        <div id="openingPage">
+            <img id="headerLogo" src="assets/images/Perfect_Date_Logo.png">
+            <!--Perfect My Date-->
+            <p class="textAbovePerfectButton">Let us set up your Perfect Date &lt;3
+            </p>
+            <button type="button" id="perfectButton" class="btn btn-default">Perfect My Date!</button>
+            <!--Animated Images for Home Screen -->
+            <div class="" id="loadImages">
+                <img id="leftImage" src="assets/images/theater_mainImage.png">
+                <img id="rightImage" src="assets/images/concertEvent_mainImage.png">
+            </div>
         </div>
     </div>
     <!--Main Page After Click Event-->
     <!--Navigation Bar-->
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <a class="navbar-brand" href=""> Logo Goes Here</a>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-        </ul>
-        <!-- Forms for Searching Criteria -->
-        <form class="navbar-form navbar-right">
-            <div class="formText">
-                <p>Movie Name/Event Name/Title:</p>
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                    <!-- Forms for Searching Criteria -->
+                    <form class="navbar-form navbar-right">
+                        <div class="formText">
+                            <p>Movie Name/Event Name/Title:</p>
+                        </div>
+                        <br>
+                        <input type="text" name="name">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                        <br>
+                        <div class="formText">
+                            <p>Zip Code/Location:</p>
+                        </div>
+                        <br>
+                        <input type="text" name="location">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
             </div>
-            <br>
-            <input type="text" name="name">
-            <button type="submit" class="btn btn-default">Submit</button>
-            <br>
-            <div class="formText">
-                <p>Zip Code/Location:</p>
-            </div>
-            <br>
-            <input type="text" name="location">
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-    </div>
-    <!--Movie/Event Form and Display-->
-    <div class="wrapper">
+        </div>
+        <!--End of Top-->
+        <!--Movie/Event Form and Display-->
         <div class="row">
             <div class="col-md-6">
                 <div class="container-fluid">
@@ -91,16 +93,10 @@ code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13
                 </div>
             </div>
         </div>
+        <!--End of Display-->
     </div>
+    <!--End Of Container-->
     <!--Footer -->
-    <div class="row">
-        <div class="container-fluid">
-            <div class="col-md-12">Footer</div>
-        </div>
-    </div>
-    </div>
-    <div class="col-md-1"></div>
-    </div>
     <!-- Greensock script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
     <script src="assets/javascript/app.js"></script>

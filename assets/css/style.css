@@ -1,9 +1,14 @@
 body {
     background-color: #333333;
-    color: white;
+}
+
+p {
+    font-family: 'Comfortaa';
+    font-size: 16px;
 }
 
 /*Both Main Images*/
+
 #leftImage,
 #rightImage {
     -webkit-filter: brightness(33%);
@@ -11,6 +16,7 @@ body {
     transition-timing-function: ease-in;
     display: inline-block;
     z-index: 1;
+    position: relative;
 }
 
 #leftImage {
@@ -25,33 +31,29 @@ body {
 
 #leftImage:hover {
     -webkit-filter: brightness(100%);
+    z-index: 2;
 }
 
 #rightImage:hover {
     -webkit-filter: brightness(100%);
-}
-
-/* Main Logo Nick Malakar*/
-#headerLogo {
-    position: absolute;
-    left: 50%;
-    top: 20%;
-    transform: translate(-50%, -50%);
-    width: 35%;
     z-index: 2;
 }
 
-/* Main Logo Justin Sobota */
+
+/* Main Logo */
+
 #headerLogo {
     position: absolute;
     left: 50%;
     top: 35%;
     transform: translate(-50%, -50%);
     width: 35%;
-    z-index: 2;
+    z-index: 4;
 }
 
+
 /*Opening Page*/
+
 #openingPage {
     position: fixed;
     top: 0;
@@ -62,17 +64,18 @@ body {
 }
 
 .textAbovePerfectButton {
-    z-index: 2;
+    z-index: 4;
     position: absolute;
     left: 50%;
     top: 70%;
     transform: translate(-50%, -50%);
     font-family: 'Comfortaa';
     font-size: 14px;
+    color: white;
 }
 
 #perfectButton {
-    z-index: 2;
+    z-index: 4;
     position: absolute;
     left: 50%;
     top: 75%;
@@ -85,4 +88,53 @@ body {
 #perfectButton:hover {
     font-size: 22px;
     transition-timing-function: ease-in;
+}
+
+
+/*Form Style*/
+
+.formText {
+    color: white;
+    display: inline-block;
+}
+
+#movieEventHolder {
+    background-color: blue;
+    color: white;
+    width: 400px;
+    height: 400px;
+    margin:20px;
+    display: inline-block;
+}
+
+#mapHolder {
+    background-color: red;
+    color: white;
+    width: 500px;
+    height: 400px;
+    margin:20px;
+    display: inline-block;
+}
+
+.mainContainer {
+    margin-right: 8%;
+    margin-left: 8%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.restaurant {
+    background-color: green;
+    width: 100%;
+    height: 175px;
+    color: white;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    background-color: white;
+    margin: 0 auto;
 }

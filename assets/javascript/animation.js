@@ -9,10 +9,16 @@ var event = $("#eventText");
 var button = $("#perfectButton");
 var buttonText = $(".textAbovePerfectButton");
 
-var movieChoice = $(".movieChoice");
+//var movieChoice = $(".movieChoice");
+var restaurant = $(".restaurant");
+
 
 // On load for site
 TweenMax.from(logo, 1.25, {ease: Back.easeOut.config(2), x: -1000});
+
+restaurant.hover(function(){
+	TweenMax.to(restaurant, 1.5, {rotation: 100});
+});
 
 
 // Image enlarge on hover
@@ -22,20 +28,20 @@ leftImage.hover(function() {
 	// Box shadow
 	TweenMax.fromTo($(this), 0.7, {boxShadow: "0px 0px 0px 0px rgba(255,255,51,0.3)"}, {boxShadow: "0px 0px 20px 10px rgba(255,255, 51,0.7)", repeat: -1, yoyo: true, ease: Linear.easeNone});
 	TweenMax.fromTo(movie, 1, {autoAlpha: 0}, {x:-450, y:-800, scale: 1.2});
-},
-function() {// Back to normal
-	TweenMax.to($(this), 0.15, {scale: 1, boxShadow: "0px 0px 0px 0px rgba(0, 0, 0, 0)"});
-});
+	},
+	function() {// Back to normal
+		TweenMax.to($(this), 0.15, {scale: 1, boxShadow: "0px 0px 0px 0px rgba(0, 0, 0, 0)"});
+});// End left hover
 
 rightImage.hover(function() {
 	TweenMax.to($(this), 0.3, {scale: 1.1});
 	// Box shadow
 	TweenMax.fromTo($(this), 0.7, {boxShadow: "0px 0px 0px 0px rgba(255,255,51,0.3)"}, {boxShadow: "0px 0px 20px 10px rgba(255,255,51,0.7)",
 	    repeat: -1, yoyo: true, ease: Linear.easeNone});
-},
-function() {// back to normal
-	TweenMax.to($(this), 0.15, {scale: 1, boxShadow: "0px 0px 0px 0px rgba(0, 0, 0, 0)"});
-});
+	},
+	function() {// back to normal
+		TweenMax.to($(this), 0.15, {scale: 1, boxShadow: "0px 0px 0px 0px rgba(0, 0, 0, 0)"});
+});// End right hover
 
 // Click on left image - both images move off page
 leftImage.click(function(){
@@ -53,10 +59,20 @@ rightImage.click(function(){
 	TweenMax.to([perfectButton, buttonText], 1, {autoAlpha: 0});// Removes button and text
 });
 
+// Restaurant
+/*restaurant.hover(function(){
+	TweenMax.to(restaurant, 1.5, {rotation: 100});
+});*/
+
 // Movie choice animation
-movieChoice.click(function() {
-	TweenMax.to($(this), 2, {scale: 1.5});
-});
+/*$(".movieChoice1").click(function(){
+	TweenMax.to($(".movieChoice"), 1, {rotation: 90});
+});*/
+
+
+/*movieChoice.click(function(){
+	TweenMax.to($(this), 1, {scale: 1.5});
+});*/
 
 /*
 

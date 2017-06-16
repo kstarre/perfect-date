@@ -2,6 +2,11 @@ body {
     background-color: #333333;
 }
 
+p {
+    font-family: 'Comfortaa';
+    font-size: 16px;
+}
+
 /*Both Main Images*/
 
 #leftImage,
@@ -94,36 +99,42 @@ body {
 }
 
 #movieEventHolder {
-	background-color: blue;
-	color: white;
-	width: 400px;
-	height: 400px;
+    background-color: blue;
+    color: white;
+    width: 400px;
+    height: 400px;
+    margin:20px;
+    display: inline-block;
 }
 
 #mapHolder {
-	background-color: red;
-	color: white;
-	width: 500px;
-	height: 400px;
+    background-color: red;
+    color: white;
+    width: 500px;
+    height: 400px;
+    margin:20px;
+    display: inline-block;
 }
 
-.mainContainer {
-	margin-right: 8%;
-	margin-left: 8%;
-	margin-top: 1%;
-	margin-bottom: 2%;
+/* .mainContainer {
+    margin-right: 8%;
+    margin-left: 8%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+} */
+
+.restaurant {
+    background-color: green;
+    width: 100%;
+    height: 175px;
+    color: white;
 }
 
 #footer {
-	background-color: green;
-	width: 100%;
-	height: 100px;
-	color: white;
-	position: fixed;
-	bottom: 0;
-	right: 0;
-}
-
-.movieChoice {
-    font-size: 18px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    background-color: white;
+    margin: 0 auto;
 }

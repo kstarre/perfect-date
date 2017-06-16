@@ -14,20 +14,20 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" text="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" text="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style2.css">
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
     <!-- jQuery -->
-    <script src="https://
-code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div class="container-fluid">
-        Top Header For Logo-->
+    <div class="firstPage">
+        <!--Top Header For Logo-->
         <div id="openingPage">
             <img id="headerLogo" src="assets/images/Perfect_Date_Logo.png">
             <!--Perfect My Date-->
-            <p class="textAbovePerfectButton">Let us set up your Perfect Date!</p>
+            <p class="textAbovePerfectButton">Let us set up your Perfect Date</p>
             <button type="button" id="perfectButton" class="btn btn-default">Perfect My Date!</button>
             <!--Animated Images for Home Screen -->
             <div class="" id="loadImages">
@@ -37,71 +37,79 @@ code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13
         </div>
     </div>
     <!--Main Page After Click Event-->
-    <!--Navigation Bar-->
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="row">
             <div class="col-md-12">
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                    </ul>
-                    <!-- Forms for Searching Criteria -->
-                    <form class="navbar-form navbar-right">
-                        <div class="formText">
-                            <p>Movie Name/Event Name/Title:</p>
-                        </div>
-                        <br>
-                        <input type="text" name="name">
-                        <button type="submit" class="btn btn-default">Submit</button>
-                        <br>
-                        <div class="formText">
-                            <p>Zip Code/Location:</p>
-                        </div>
-                        <br>
-                        <input type="text" name="location">
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-                </div>
+                <!-- Forms for Searching Criteria -->
+                <form class="navbar-form navbar-right">
+                    <div class="formText">
+                        <p>Movie Name/Event Name/Title:</p>
+                    </div>
+                    <br>
+                    <input type="text" name="name">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                    <br>
+                    <div class="formText">
+                        <p>Zip Code/Location:</p>
+                    </div>
+                    <br>
+                    <input type="text" name="location">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>                
             </div>
-        </div>
-        <!--End of Top-->
-        <!--Movie/Event Form and Display-->
+        </div><!--End of Top-->
+        
+        <!--Movie/Event and Map Display-->
         <div class="row">
+            <!-- Movie/Event Display-->
             <div class="col-md-6">                
                 <div class="row">
-                <!--This is where the Movies/Events will display-->
                     <div class="col-md-12">
-                        <div id="movieEventHolder">Movie or Event Go Here
-                            <div class="movieChoice">movie 1</div>
-                            <div class="movieChoice">movie 2</div>
-                            <div class="movieChoice">movie 3</div>
-                            <div class="movieChoice">movie 4</div>
+                        <div id="movieEventHolder">
+                            <p class="movieChoice">Movie or Event Goes Here</p>
                         </div>
                     </div>
                 </div>                
             </div>
-            <!--This is where the Map will be displayed-->
-            <div class="col-md-6">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="mapHolder">Map Goes Here</div>
+            <!--Map Display-->
+            <div class="col-md-6">                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="mapHolder">
+                            <p>Map Goes Here</p>
                         </div>
                     </div>
+                </div>                
+            </div>
+        </div><!--End of Display-->
+
+        <!--Restaurants Div-->
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class='restaurant' id="food">
+                    <p>Restaurants go Here!</p>
                 </div>
             </div>
         </div>
-        <!--End of Display-->
-    </div>
-    <!--End Of Container-->
-    <!--Footer -->
-    <!-- Greensock script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
-    <script src="assets/javascript/app.js"></script>
-    <script src="assets/javascript/animation.js"></script>
-    <!-- Moment.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <!--Footer-->
+        <div class="row">
+            <div class="col-md-12">
+                <div id="footer">
+                    <p> Created by Git Bassholes&copy; </p>
+                </div>
+            </div>
+        </div>
+       
+        <!--End Of Container-->
+        <!-- Greensock script -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+        <script src="assets/javascript/app.js"></script>
+        <script src="assets/javascript/animation.js"></script>
+
+
+        <!-- Moment.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </body>
 
 </html>

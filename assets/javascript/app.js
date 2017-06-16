@@ -17,7 +17,7 @@ var database = firebase.database
 
 // Gracenote API and OMDB API
 $(window).on("load", function() {
-	var queryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=2017-06-13&zip=44131" + "&api_key=6n4cata848e7z3fha7nkgb77";
+	var queryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=2017-06-13&zip=44131" + "&api_key=zephc9snecc3dpg2eh66m4ng";
 
 	$.ajax({
 		url: queryURL,
@@ -43,7 +43,7 @@ $(window).on("load", function() {
 });
 
 // Event Brite API
->>>>>>> f5e3ef990e35a3db891bc324d9e9cf274d52b825
+
 var queryURL = "https://www.eventbriteapi.com/v3/events/search/?token=WJ5ZSOV6TV56IC44E7EJ&location.address=Cleveland";
 
   $.ajax({

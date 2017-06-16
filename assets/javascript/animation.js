@@ -9,7 +9,7 @@ var event = $("#eventText");
 var button = $("#perfectButton");
 var buttonText = $(".textAbovePerfectButton");
 
-var movieChoice = $(".movieChoice");
+/*var movieChoice = $(".movieChoice");*/
 
 // On load for site
 TweenMax.from(logo, 1.25, {ease: Back.easeOut.config(2), x: -1000});
@@ -53,10 +53,10 @@ rightImage.click(function(){
 	TweenMax.to([perfectButton, buttonText], 1, {autoAlpha: 0});// Removes button and text
 });
 
-// Movie choice animation
+/*// Movie choice animation
 movieChoice.click(function() {
 	TweenMax.to($(this), 2, {scale: 1.5});
-});
+});*/
 
 /*
 {textShadow:"2px 2px 15px white", color: "red"}

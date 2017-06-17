@@ -19,6 +19,8 @@
     <!-- jQuery -->
     <script src="https://
 code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<!-- google Maps -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_ktoy3ioZjq2ACaYT81nqe_EAvPKMFhA"></script>
 </head>
 
 <body>
@@ -62,7 +64,7 @@ code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13
                         <br>
 
                         <input type="text" name="location" id="enteredZipCode">
-                        <button type="button" id="zipCode" class="btn btn-default">Submit</button>
+                        <button onclick="searchAddress();" type="button" id="zipCode" class="btn btn-default">Submit</button>
                     </form>
                 </div>
             </div>

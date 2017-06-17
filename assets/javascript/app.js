@@ -9,7 +9,7 @@ var config = {
 };
 firebase.initializeApp(config);
 
-//Event Brite API
+
 
 
 
@@ -24,7 +24,7 @@ $(window).on("load", function() {
 		url: queryURL,
 		method: "GET"
 	}).done(function(response) {
-		console.log(response);
+
 
 		for (var i = 0; i < response.length; i++) {
 			var subsection = $("<div>");
@@ -42,6 +42,78 @@ $(window).on("load", function() {
 	});
 
 });
+//Google Maps API
+
+
+var map;
+var marker;
+
+
+function initialize() {
+
+	var mapOptions = {
+		center: new google.maps.LatLng(40.680898,-8.684059),
+		zoom: 10,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+
+	map = new google.maps.Map(document.getElementById("mapHolder"), mapOptions);
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+function searchAddress() {
+
+	var addressInput = $('#enteredZipCode').val();
+  
+	//this is what the variable to pass will be
+	var geocoder = new google.maps.Geocoder();
+
+	geocoder.geocode({address: addressInput}, function(results, status) {
+
+		if (status == google.maps.GeocoderStatus.OK) {
+
+      var myResult = results[0].geometry.location;
+
+      createMarker(myResult);
+
+      map.setCenter(myResult);
+
+      map.setZoom(17);
+
+		}
+	});
+
+}
+
+function createMarker(latlng) {
+
+  if(marker != undefined && marker != ''){
+    marker.setMap(null);
+    marker = '';
+  }
+
+  marker = new google.maps.Marker({
+    map: map,
+    position: latlng
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Event Brite API
 $(document).ready(function(){
@@ -50,8 +122,7 @@ $(document).ready(function(){
 		 //var enteredName = document.getElementById('enteredFormName').value.replace(' ', '+');
      if (zipCode.length != 5) {
        $('#movieEventHolder').html("Invalid zip code");
-       console.log("Wrong");
-       console.log(zipCode);
+
      }
      else {
        $('#movieEventHolder').val("Displaying events around " + zipCode);
@@ -69,16 +140,20 @@ $(document).ready(function(){
        //console.log(event.events[0].logo.url);
        //console.log (event.location.address);
        var content =
-       "<br><div id='#movieEventHolder'>" + event.events[10].name.html + "</div><br><br>" +
-       "<div id='#movieEventHolder'>" + event.events[20].name.html + "</div><br><br>" +
-       "<div id='#movieEventHolder'>" + event.events[30].name.html + "</div><br><br>" +
-       "<div id='#movieEventHolder'>" + event.events[40].name.html + "</div><br><br>"
+       "<div id='#movieEventHolder' class='userChoice'>Displaying events around " + event.location.augmented_location.city + ", " + event.location.augmented_location.region + "<div><br>" +
+       "<br><div id='#movieEventHolder' class='userChoice' >" + event.events[0].name.html + "</div><br><br>" +
+       "<div id='#movieEventHolder' class='userChoice'>" + event.events[1].name.html + "</div><br><br>" +
+       "<div id='#movieEventHolder' class='userChoice'>" + event.events[2].name.html + "</div><br><br>" +
+       "<div id='#movieEventHolder' class='userChoice'>" + event.events[3].name.html + "</div><br><br>"
        ;
        $("#movieEventHolder").html(content);
+
      });
 
 }
 //closing if/else statement
+
+
 
 	    });
     });

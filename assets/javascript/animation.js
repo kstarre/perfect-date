@@ -2,8 +2,8 @@
 
 var logo = $("#headerLogo");
 
-var leftImage = $("#leftImage");
-var rightImage = $("#rightImage");
+var leftImage = $("#movieImage");
+var rightImage = $("#eventImage");
 var movie = $("#movieText");
 var event = $("#eventText");
 var button = $("#perfectButton") + $("#textAbovePerfectButton");

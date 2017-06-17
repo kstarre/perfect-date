@@ -13,6 +13,7 @@ $(document).ready(function() {
 
 	// KS gracenote API 6n4cata848e7z3fha7nkgb77
 	// NS gracenote API zephc9snecc3dpg2eh66m4ng
+	// NM gracenote API mwe8tdv7qxnfckf89bjmeyab
 	// KS google places API AIzaSyBsKJtUzYMWM6ZpYy_eVpnfRbE4gWQY-d8
 
 	var location = 44131;
@@ -34,29 +35,27 @@ $(document).ready(function() {
 	         radius: 1000,
 	         type: ['restaurant']
 	       }, callback);
-	}
+	};
 
 	function callback(results, status) {
 	    if (status === google.maps.places.PlacesServiceStatus.OK) {
 	       	console.log(results);
-	       	$("#food").html(results[i].name);
+	       	$("#food").html(results[0].name);
 /*	       	for(var i = 0; i > 4; i++) {
 	       		var subsection = $("<div>");
 	       		var restaurantName = $("<p>");
 	       		subsection.attr("id", "restaurantResult");
 	       		restaurantName.html(results[i].name);
 	       		subsection.html(restaurantName);
-	       		$("#food").append(subsection);*/
-	       	};
+	       		$("#food").append(subsection);
+	       	};*/
 	    }
-	}
-
-	$(window).load(initMap());
+	};
 	
 	// Gracenote API
 	$("#movieImage").on("click", function() {
 		var date = moment().format("YYYY-MM-DD");
-		var apiKey = "6n4cata848e7z3fha7nkgb77";
+		var apiKey = "mwe8tdv7qxnfckf89bjmeyab";
 		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + location + "&api_key=" + apiKey;
 		$.ajax({
 			url: gracenoteQueryURL,
@@ -78,6 +77,7 @@ $(document).ready(function() {
 	});
 
 	$(document).on("click", ".userChoice", function() {
+		initMap();
 		for(var i = 0; i < movieObject.length; i++) {
 			if( $(this).attr("data-name") === movieObject[i].title) {
 				var subsection = $("<div>");
@@ -123,4 +123,4 @@ $(document).ready(function() {
 			$("#movieEventHolder").append(subsection);
 		};
 	});
-};
+});

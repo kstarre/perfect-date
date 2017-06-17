@@ -138,3 +138,10 @@ p {
     background-color: white;
     margin: 0 auto;
 }
+/* KS for table */
+.panel.heading {
+    color: black;
+}
+.panel.panel-default {
+    color: black;
+}

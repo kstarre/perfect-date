@@ -17,10 +17,10 @@ $(document).ready(function() {
 	var movieObject; 
 
 	// Gracenote API
-	$("#leftImage").on("click", function() {
+	$("#test").on("click", function() {
 		var date = moment().format("YYYY-MM-DD");
 		var location = 44131;
-		var apiKey = "6n4cata848e7z3fha7nkgb77";
+		var apiKey = "zephc9snecc3dpg2eh66m4ng";
 		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + location + "&api_key=" + apiKey;
 		$.ajax({
 			url: gracenoteQueryURL,
@@ -42,42 +42,51 @@ $(document).ready(function() {
 	});
 
 	$(document).on("click", ".movieChoice", function() {
-		for(var i = 0; i < movieObject.length; i++) {	
+		for(var i = 0; i < movieObject.length; i++) {
 			if( $(this).attr("data-name") === movieObject[i].title) {
-
 				var subsection = $("<div>");
-				var title = $("<p>");
-				var times = $("<p>");
+				var title = $("<div>");
+				var timeTable = $("<table>");
 				var goBack = $("<button>");
+				subsection.addClass("panel panel-default");
+				title.addClass("panel heading");
+				timeTable.addClass("table");
 				goBack.html("Want a different movie?");
-				goBack.attr("id", "goBackButton")
+				goBack.attr("id", "goBackButton");
 				title.html(movieObject[i].title);
 				subsection.append(title);
 				for (var j = 0; j < movieObject[i].showtimes.length; j++) {
-					times.append(movieObject[i].showtimes[j].dateTime + " ");
+					var tableRow = $("<tr>");
+					var time = $("<td>");
+					var theater = $("<td>");
+					time.html(moment(movieObject[i].showtimes[j].dateTime).format("h:mm A"));
+					theater.html(movieObject[i].showtimes[j].theatre.name);
+					tableRow.append(time);
+					tableRow.append(theater);
+					timeTable.append(tableRow);
 				};
-				subsection.append(times);
-				subsection.append(goBack);
+				subsection.append(timeTable);
 				$("#movieEventHolder").html(subsection);
-				database.ref().push( {
+				$("#movieEventHolder").append(goBack);
+				database.ref('/movieList').push( {
 					movie: movieObject[i].title
 				});
 			}
 		};
 	});
 
-/*	$(document).on("click", "#goBackButton", function(event) {
-		event.preventDefault();
+	$(document).on("click", "#goBackButton", function() {
+		$("#movieEventHolder").empty();
 		for(var i = 0; i < movieObject.length; i++) {
 			var subsection = $("<div>");
 			var title = $("<p>");
-			//subsection.addClass("movieChoice");
+			subsection.addClass("movieChoice");
 			subsection.attr("data-name", movieObject[i].title);
 			title.html(movieObject[i].title);
 			subsection.append(title);
-			$("#movieEventHolder").html(subsection);
+			$("#movieEventHolder").append(subsection);
 		};
-	});*/
+	});
 
 
 

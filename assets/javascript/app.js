@@ -21,13 +21,58 @@ $(document).ready(function() {
 	var movieObject; 
 	var map;
 	var infowindow;
+	var marker;
+
+	function initialize() {
+
+		var mapOptions = {
+			center: new google.maps.LatLng(40.680898,-8.684059),
+			zoom: 10,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+
+		map = new google.maps.Map(document.getElementById("mapHolder"), mapOptions);
+
+	};
+
+	function searchAddress() {
+
+		var addressInput = $('#enteredZipCode').val();
+	  
+		//this is what the variable to pass will be
+		var geocoder = new google.maps.Geocoder();
+
+		geocoder.geocode({address: addressInput}, function(results, status) {
+
+			if (status == google.maps.GeocoderStatus.OK) {
+
+	      var myResult = results[0].geometry.location;
+
+	      createMarker(myResult);
+
+	      map.setCenter(myResult);
+
+	      map.setZoom(17);
+
+			}
+		});
+
+	};
+
+	function createMarker(latlng) {
+
+	  if(marker != undefined && marker != ''){
+	    marker.setMap(null);
+	    marker = '';
+	  }
+
+	  marker = new google.maps.Marker({
+	    map: map,
+	    position: latlng
+	  });
+	};
 
 	function initMap() {
-	       map = new google.maps.Map(document.getElementById('mapHolder'), {
-	         center: latLong,
-	         zoom: 15
-	       });
-
 	       infowindow = new google.maps.InfoWindow();
 	       var service = new google.maps.places.PlacesService(map);
 	       service.nearbySearch({
@@ -52,6 +97,9 @@ $(document).ready(function() {
 	    }
 	};
 	
+	// Loads Google map on window load
+	google.maps.event.addDomListener(window, 'load', initialize);
+
 	// Gracenote API
 	$("#movieImage").on("click", function() {
 		var date = moment().format("YYYY-MM-DD");
@@ -77,7 +125,6 @@ $(document).ready(function() {
 	});
 
 	$(document).on("click", ".userChoice", function() {
-		initMap();
 		for(var i = 0; i < movieObject.length; i++) {
 			if( $(this).attr("data-name") === movieObject[i].title) {
 				var subsection = $("<div>");
@@ -122,5 +169,39 @@ $(document).ready(function() {
 			subsection.append(title);
 			$("#movieEventHolder").append(subsection);
 		};
+	});
+
+	// Event Brite API
+	$('#zipCode').click(function(){
+	    var zipCode = $('#enteredZipCode').val();
+	    console.log(zipCode);
+		//var enteredName = document.getElementById('enteredFormName').value.replace(' ', '+');
+	    if (zipCode.length != 5) {
+	    	$('#movieEventHolder').html("Invalid zip code");
+	    }
+	    else {
+	    	$('#movieEventHolder').val("Displaying events around " + zipCode);
+		    //Ajax Request
+		    var queryURL = "https://www.eventbriteapi.com/v3/events/search/?token=WJ5ZSOV6TV56IC44E7EJ&location.address=" + zipCode;
+
+		    $.ajax({
+		    	url: queryURL,
+		    	method: "GET"
+		    }).done(function (event) {
+		    	//full object
+		    	//console.log(event);
+		    	//console.log(event.events[0].logo.url);
+		    	//console.log (event.location.address);
+		    	var content =
+		    	"<div id='#movieEventHolder' class='userChoice'>Displaying events around " + event.location.augmented_location.city + ", " + event.location.augmented_location.region + "<div><br>" +
+		    	"<br><div id='#movieEventHolder' class='userChoice' >" + event.events[0].name.html + "</div><br><br>" +
+		    	"<div id='#movieEventHolder' class='userChoice'>" + event.events[1].name.html + "</div><br><br>" +
+		    	"<div id='#movieEventHolder' class='userChoice'>" + event.events[2].name.html + "</div><br><br>" +
+		    	"<div id='#movieEventHolder' class='userChoice'>" + event.events[3].name.html + "</div><br><br>"
+		    	;
+		    	$("#movieEventHolder").html(content);
+		    });
+		};
+	//closing if/else statement
 	});
 });

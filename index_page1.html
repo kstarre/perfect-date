@@ -17,88 +17,69 @@
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://
+code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <!--Top Header For Logo-->
-            <div id="openingPage">
-                <img id="headerLogo" src="assets/images/Perfect_Date_Logo.png" alt="Perfect Date Logo" />
-
-                <!-- JSobota Perfect My Date-->
-                <p class="textAbovePerfectButton">Let us set up your Perfect Date <3</p>
-                <button type="button" id="perfectButton" class="btn btn-default">Perfect My Date!</button>
-                <!--Animated Images for Home Screen -->
-                <div class="col-md-12" id="loadImages">
-                    <img id="leftImage" src="assets/images/theater_mainImage.png">
-                    <img id="rightImage" src="assets/images/concertEvent_mainImage.png">
-                </div>
-
-                <!-- N Malakar -->
-                <!--Animated Images for Home Screen -->
-                <div class="col-md-12" id="loadImages">
-                    <img id="leftImage" src="assets/images/theater_mainImage.png" alt="Theater Image">
-                    <h2 id='movie-text'>Movie</h2>
-                    <img id="rightImage" src="assets/images/concertEvent_mainImage.png" alt="Event Image">
-                    <h2 id='movie-text'>Movie</h2>
-                </div>
+    <div class="container-fluid">
+        Top Header For Logo-->
+        <div id="openingPage">
+            <img id="headerLogo" src="assets/images/Perfect_Date_Logo.png">
+            <!--Perfect My Date-->
+            <p class="textAbovePerfectButton">Let us set up your Perfect Date &lt;3
+            </p>
+            <button type="button" id="perfectButton" class="btn btn-default">Perfect My Date!</button>
+            <!--Animated Images for Home Screen -->
+            <div class="" id="loadImages">
+                <img id="leftImage" src="assets/images/theater_mainImage.png">
+                <img id="rightImage" src="assets/images/concertEvent_mainImage.png">
             </div>
         </div>
-        <!--Main Page After Click Event-->
-        <!--Navigation Bar-->
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href=""> Logo Goes Here
-                            <img src="#" width="128px">
-                        </a>
-                </div>
+    </div>
+    <!--Main Page After Click Event-->
+    <!--Navigation Bar-->
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="row">
+            <div class="col-md-12">
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                     </ul>
+                    <!-- Forms for Searching Criteria -->
                     <form class="navbar-form navbar-right">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
+                        <div class="formText">
+                            <p>Movie Name/Event Name/Title:</p>
                         </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <br>
+                        <input type="text" name="name">
+                        <button type="button" class="btn btn-default">Submit</button>
+                        <br>
+                        <div class="formText">
+                            <p>Zip Code/Location:</p>
+                        </div>
+                        <br>
+
+                        <input type="text" name="location" id="enteredZipCode">
+                        <button type="button" id="zipCode" class="btn btn-default">Submit</button>
                     </form>
                 </div>
-                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.container-fluid -->
-        </nav>
+        </div>
+        <!--End of Top-->
         <!--Movie/Event Form and Display-->
         <div class="row">
             <div class="col-md-6">
                 <div class="container-fluid">
                     <div class="row">
-                        <!--Form for search-->
-                        <div class="container-fluid">
-                            <form>
-                                Movie Name/Event Name/Title:
-                                <br>
-                                <input type="text" name="name">
-                                <br> Zip Code/Location:
-                                <br>
-                                <input type="text" name="location">
-                            </form>
-                        </div>
                     </div>
                     <!--This is where the Movies/Events will display-->
                     <div class="row">
                         <div class="col-md-12">
-                            <div id="movieEventHolder">Movie or Event Go Here</div>
+                            <div id="movieEventHolder">
+                                <p>Movie or Event Go Here</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -108,37 +89,38 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
-                            <div id="mapHolder">Map Goes Here</div>
+                            <div id="mapHolder">
+                                <p>Map Goes Here</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    
-        <!--restaurant div -->
+        <!--End of Display-->
+        <!--Restaurants-->
         <div class="row">
-            <div class="container-fluid">
-                <div class="col-md-12" id='restaurants'>
-                    This is the restaurants div
+            <div class="col-md-10 col-md-offset-1">
+                <div class="restaurant" id="food">
+                    <p>Restaurants go Here!</p>
                 </div>
             </div>
-        </div>
-
-        <!--Footer -->
-        <div class="row">
-            <div class="container-fluid">
+            <!--Footer-->
+            <div class="row">
                 <div class="col-md-12">
-                    <p>This is a Perfect Date Production</p>
-                    <p>KSNSJSNM&copy; 2017</p>
+                    <div id="footer">
+                        <p> Created by Git Bassholes&copy; </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Greensock script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
-    <script src="assets/javascript/app.js"></script>
-    <script src="assets/javascript/animation.js"></script>
+        <!--End Of Container-->
+        <!-- Greensock script -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+        <script src="assets/javascript/app.js"></script>
+        <script src="assets/javascript/animation.js"></script>
+        <!-- Moment.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </body>
 
 </html>

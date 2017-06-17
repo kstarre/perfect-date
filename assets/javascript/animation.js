@@ -43,7 +43,7 @@ eventImage.hover(function() {
 function click() {
 	TweenMax.to(movieImage, 1, {x:-1200, ease:Linear.easeNone, rotation: 360, force3D:true, onComplete: hideOpeningPage, onStart: hideRestaurantDiv});
 	TweenMax.to(eventImage, 1, {x:1200, ease:Linear.easeNone, rotation: -360, force3D:true});
-	TweenMax.to(logo, 1, {x: -725, y: -290, rotation: 360, scale:0.25});// Moves logo
+	TweenMax.to(logo, 1, {x: -700, y: -270, rotation: 360, scale:0.25});// Moves logo
 	TweenMax.to([perfectButton, buttonText], 1, {autoAlpha: 0});// Removes button and text
 };
 

@@ -1,0 +1,26 @@
+/* Media Queries */
+
+/*iPhone*/
+@media screen and (max-width: 640px)  {
+	/*Opening Page*/
+	#leftImage{
+		background-image: assets/images/concertEvent_mainImage_mobile
+	}
+
+	#rightImage{
+
+	}
+
+	/*main page*/
+	#mapHolder{
+		height: 200px;
+		width: 400px;
+	}
+
+	#movieEventHolder {
+		height: 200px;
+		width: 400px;
+	}
+
+
+}

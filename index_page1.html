@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!--Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:400,600" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" text="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" text="text/css" href="assets/css/style.css">
@@ -24,7 +25,7 @@ code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13
 
 <body>
     <div class="container-fluid">
-        Top Header For Logo-->
+       <!--Top Header For Logo-->
         <div id="openingPage">
             <img id="headerLogo" src="assets/images/Perfect_Date_Logo.png">
             <!--Perfect My Date-->
@@ -46,24 +47,30 @@ code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13
             <div class="col-md-12">
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                    </ul>
-                    <!-- Forms for Searching Criteria -->
-                    <form class="navbar-form navbar-right">
-                        <div class="formText">
-                            <p>Movie Name/Event Name/Title:</p>
-                        </div>
-                        <br>
-                        <input type="text" name="name">
-                        <button type="submit" class="btn btn-default">Submit</button>
-                        <br>
-                        <div class="formText">
-                            <p>Zip Code/Location:</p>
-                        </div>
-                        <br>
-                        <input type="text" name="location">
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
+                    <div class="row">
+                        <ul class="nav navbar-nav">
+                        </ul>
+                        <!-- Forms for Searching Criteria -->
+                        <form class="navbar-form navbar-right">
+                            <div class="col-md-6">
+                                <div class="formText">
+                                    <p>Movie Name/Event Name/Title:</p>
+                                </div>
+                                <br>
+                                <input type="text" name="name">
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </div>
+                            <br>
+                            <div class="col-md-6">
+                                <div class="formText">
+                                    <p>Zip Code/Location:</p>
+                                </div>
+                                <br>
+                                <input type="text" name="location">
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,13 +79,17 @@ code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13
         <div class="row">
             <div class="col-md-6">
                 <div class="container-fluid">
-                    <div class="row">
-                    </div>
                     <!--This is where the Movies/Events will display-->
                     <div class="row">
                         <div class="col-md-12">
-                            <div id="movieEventHolder">
-                                <p>Movie or Event Go Here</p>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Movies/Events</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="movieEventHolder">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -89,38 +100,51 @@ code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
-                            <div id="mapHolder">
-                                <p>Map Goes Here</p>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Map of Loacations</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="mapHolder">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--End of Display-->
-        <!--Restaurants-->
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="restaurant" id="food">
-                    <p>Restaurants go Here!</p>
+    </div>
+    <!--End of Display-->
+    <!--Restaurants-->
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Restaurants</h3>
                 </div>
-            </div>
-            <!--Footer-->
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="footer">
-                        <p> Created by Git Bassholes&copy; </p>
+                <div class="panel-body">
+                    <div id="foodHolder">
                     </div>
                 </div>
             </div>
         </div>
-        <!--End Of Container-->
-        <!-- Greensock script -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
-        <script src="assets/javascript/app.js"></script>
-        <script src="assets/javascript/animation.js"></script>
-        <!-- Moment.js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <!--Footer-->
+        <!--<div class="row">
+            <div class="col-md-12">
+                <div id="footer">
+                    <p> Created by Git Bassholes&copy; </p>
+                </div>
+            </div>
+        </div>-->
+    </div>
+    <!--End Of Container-->
+    <!-- Greensock script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+    <script src="assets/javascript/app.js"></script>
+    <script src="assets/javascript/animation.js"></script>
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </body>
 
 </html>

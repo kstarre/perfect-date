@@ -9,8 +9,8 @@ p {
 
 /*Both Main Images*/
 
-#leftImage,
-#rightImage {
+#movieImage,
+#eventImage {
     -webkit-filter: brightness(33%);
     transition: -webkit-filter 0.5s;
     transition-timing-function: ease-in;
@@ -19,22 +19,22 @@ p {
     position: relative;
 }
 
-#leftImage {
+#movieImage {
     float: left;
     width: 50%;
 }
 
-#rightImage {
+#eventImage {
     float: left;
     width: 50%;
 }
 
-#leftImage:hover {
+#movieImage:hover {
     -webkit-filter: brightness(100%);
     z-index: 2;
 }
 
-#rightImage:hover {
+#eventImage:hover {
     -webkit-filter: brightness(100%);
     z-index: 2;
 }

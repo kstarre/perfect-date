@@ -14,8 +14,8 @@ p {
 
 /*Both Main Images*/
 
-#leftImage,
-#rightImage {
+#movieImage,
+#eventImage {
     -webkit-filter: brightness(33%);
     transition: -webkit-filter 0.5s;
     transition-timing-function: ease-in;
@@ -24,22 +24,22 @@ p {
     position: relative;
 }
 
-#leftImage {
+#movieImage {
     float: left;
     width: 50%;
 }
 
-#rightImage {
+#eventImage {
     float: left;
     width: 50%;
 }
 
-#leftImage:hover {
+#movieImage:hover {
     -webkit-filter: brightness(100%);
     z-index: 2;
 }
 
-#rightImage:hover {
+#eventImage:hover {
     -webkit-filter: brightness(100%);
     z-index: 2;
 }
@@ -120,17 +120,17 @@ p {
 #movieEventHolder {
 	background-color: blue;
 	color: white;
-	width: 400px;
-	height: 400px;
+	/*width: 400px;
+	height: 400px;*/
 	margin:20px;
 	display: inline-block;
 }
 
 #mapHolder {
-	background-color: red;
+	/*background-color: red;*/
 	color: white;
-	width: 400px;
-	height: 400px;
+	/*width: 400px;
+	height: 400px;*/
 	margin:20px;
 	display: inline-block;
 }
@@ -138,14 +138,14 @@ p {
 .mainContainer {
 	margin-right: 8%;
 	margin-left: 8%;
-	margin-top: 1%;
+	margin-top: 4%;
 	margin-bottom: 2%;
 }
 
-#foodHolder {
-	background-color: green;
+#food {
+	/*background-color: green;
 	width: 100%;
-	height: 175px;
+	height: 175px;*/
 	color: white;
 }
 

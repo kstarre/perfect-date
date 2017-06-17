@@ -11,8 +11,13 @@ h3,
 }
 
 p {
-    font-family: 'Josefin';
+    font-family: 'Comfortaa';
     font-size: 16px;
+}
+
+input {
+    height: 34px;
+    border-radius: 5px;
 }
 
 .submit {
@@ -21,7 +26,16 @@ p {
 
 .userChoice {
     font-family: 'Josefin';
-    font-size: 15px;
+    font-size: 18px;
+}
+
+.table {
+    font-family: 'Josefin';
+    font-size: 16px;
+}
+
+#goBackButton {
+    background-color: black;
 }
 
 

@@ -3,13 +3,19 @@
 /*iPhone*/
 @media screen and (max-width: 640px)  {
 	/*Opening Page*/
-	#leftImage{
-		background-image: assets/images/concertEvent_mainImage_mobile
+	#movieImage {
+		left: 0;
+		width: 50%;
+		height: 960px;
 	}
 
-	#rightImage{
-
+	#eventImage {
+		left:50%;
+		width: 50%
+		top:0;
+		bottom: 0;
 	}
+
 
 	/*main page*/
 	#mapHolder{

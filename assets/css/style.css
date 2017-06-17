@@ -51,6 +51,15 @@ p {
     z-index: 4;
 }
 
+#headerLogo2 {
+    position: relative;
+    width: 11%;
+    height: 11%;
+    float: left;
+    padding: 5px;
+    
+}
+
 
 /*Opening Page*/
 
@@ -115,13 +124,6 @@ p {
     margin:20px;
     display: inline-block;
 }
-
-/* .mainContainer {
-    margin-right: 8%;
-    margin-left: 8%;
-    margin-top: 1%;
-    margin-bottom: 2%;
-} */
 
 .restaurant {
     background-color: green;

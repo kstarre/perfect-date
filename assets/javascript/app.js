@@ -13,14 +13,50 @@ $(document).ready(function() {
 
 	// KS gracenote API 6n4cata848e7z3fha7nkgb77
 	// NS gracenote API zephc9snecc3dpg2eh66m4ng
+	// KS google places API AIzaSyBsKJtUzYMWM6ZpYy_eVpnfRbE4gWQY-d8
 
+	var location = 44131;
+	var latLong = {lat: 41.478044, lng: -81.684132};
 	var movieObject; 
+	var map;
+	var infowindow;
 
+	function initMap() {
+	       map = new google.maps.Map(document.getElementById('mapHolder'), {
+	         center: latLong,
+	         zoom: 15
+	       });
+
+	       infowindow = new google.maps.InfoWindow();
+	       var service = new google.maps.places.PlacesService(map);
+	       service.nearbySearch({
+	         location: latLong,
+	         radius: 1000,
+	         type: ['restaurant']
+	       }, callback);
+	}
+
+	function callback(results, status) {
+	    if (status === google.maps.places.PlacesServiceStatus.OK) {
+	       	console.log(results);
+	       	$("#food").html(results[i].name);
+/*	       	for(var i = 0; i > 4; i++) {
+	       		var subsection = $("<div>");
+	       		var restaurantName = $("<p>");
+	       		subsection.attr("id", "restaurantResult");
+	       		restaurantName.html(results[i].name);
+	       		subsection.html(restaurantName);
+	       		$("#food").append(subsection);*/
+	       	};
+	    }
+	}
+
+	$(window).load(initMap());
+	
 	// Gracenote API
-	$("#test").on("click", function() {
+	$("#movieImage").on("click", function() {
 		var date = moment().format("YYYY-MM-DD");
-		var location = 44131;
-		var apiKey = "zephc9snecc3dpg2eh66m4ng";
+		var apiKey = "6n4cata848e7z3fha7nkgb77";
 		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + location + "&api_key=" + apiKey;
 		$.ajax({
 			url: gracenoteQueryURL,
@@ -32,7 +68,7 @@ $(document).ready(function() {
 			for (var i = 0; i < gracenoteResponse.length; i++) {
 				var subsection = $("<div>");
 				var title = $("<p>");
-				subsection.addClass("movieChoice");
+				subsection.addClass("userChoice");
 				subsection.attr("data-name", gracenoteResponse[i].title);
 				title.html(gracenoteResponse[i].title);
 				subsection.append(title);
@@ -41,7 +77,7 @@ $(document).ready(function() {
 		});
 	});
 
-	$(document).on("click", ".movieChoice", function() {
+	$(document).on("click", ".userChoice", function() {
 		for(var i = 0; i < movieObject.length; i++) {
 			if( $(this).attr("data-name") === movieObject[i].title) {
 				var subsection = $("<div>");
@@ -87,21 +123,4 @@ $(document).ready(function() {
 			$("#movieEventHolder").append(subsection);
 		};
 	});
-
-
-
-
-	// Event Brite API
-	$("#rightImage").on("click", function() { 
-		var queryURL = "https://www.eventbriteapi.com/v3/events/search/?token=WJ5ZSOV6TV56IC44E7EJ&location.address=Cleveland";
-
-		  $.ajax({
-		    url: queryURL,
-		    method: "GET"
-
-		  }).done(function (event) {
-		    //full object
-		    console.log(event);
-		  });
-	});
-});
+};

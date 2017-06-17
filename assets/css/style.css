@@ -145,3 +145,6 @@ p {
 .panel.panel-default {
     color: black;
 }
+#restaurantResult {
+    display: inline-block;
+}

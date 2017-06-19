@@ -180,7 +180,7 @@ $(document).ready(function() {
 		    	//console.log(event);
 		    	//console.log(event.events[0].logo.url);
 		    	//console.log (event.location.address);
-		    	var content = "<div class='userChoice'>Displaying events around " + event.location.augmented_location.city + ", " + event.location.augmented_location.region + "<div><br>" + "<br><div class='userChoice' >" + event.events[0].name.html + "</div><br><br>" + "<div class='userChoice'>" + event.events[1].name.html + "</div><br><br>" + "<div class='userChoice'>" + event.events[2].name.html + "</div><br><br>" + "<div class='userChoice'>" + event.events[3].name.html + "</div><br><br>";
+		    	var content = "<div>Displaying events around " + event.location.augmented_location.city + ", " + event.location.augmented_location.region + "</div><br>" + "<br><div class='userChoice' >" + event.events[0].name.html + "</div><br><br>" + "<div class='userChoice'>" + event.events[1].name.html + "</div><br><br>" + "<div class='userChoice'>" + event.events[2].name.html + "</div><br><br>" + "<div class='userChoice'>" + event.events[3].name.html + "</div><br><br>";
 		    	$("#movieEventHolder").html(content);
 		    });
 		};

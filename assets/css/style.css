@@ -1,6 +1,5 @@
 body {
     background-image: url(../images/east4th_background.jpg);
-    background-size: width 80px 60px;
 }
 
 h1, h2, h3, .btn, .btn-default {
@@ -8,13 +7,33 @@ h1, h2, h3, .btn, .btn-default {
 }
 
 p {
-	font-family: 'Josefin';
+	font-family: 'Comfortaa';
 	font-size: 16px;
+}
+
+input {
+    height: 34px;
+    border-radius: 5px;
 }
 
 .submit {
     font-size: 14px;
 }
+
+.userChoice {
+    font-family: 'Josefin';
+    font-size: 18px;
+}
+
+.table {
+    font-family: 'Josefin';
+    font-size: 16px;
+}
+
+#goBackButton {
+    background-color: black;
+}
+
 /*Both Main Images*/
 
 #movieImage,
@@ -121,20 +140,18 @@ p {
 }
 
 #movieEventHolder {
-	background-color: blue;
 	color: white;
-	/*width: 400px;
-	height: 400px;*/
-	margin:20px;
+	width: 400px;
+	height: 200px;
+	margin: 20px;
 	display: inline-block;
 }
 
 #mapHolder {
-	/*background-color: red;*/
 	color: white;
 	width: 400px;
-	height: 400px;
-	margin:20px;
+	height: 200px;
+	margin: 20px;
 	display: inline-block;
 }
 
@@ -155,6 +172,7 @@ p {
 	height: 175px;*/
 	color: white;
 }
+
 #restaurantResult {
     display: inline-block;
     padding: 10px;
@@ -169,4 +187,3 @@ p {
 	background-color: white;
 	margin: 0 auto;
 }
-

@@ -1,11 +1,11 @@
-     @media only screen and (min-device-width: 414px) {
+     @media only screen (max-width: 414px) {
      /*Opening Page*/
      #eventImage {
          z-index: 3;
-         height: 500px;
+         
      }
      #movieImage {
-         height: 500px;
+         
      }
      .textAbovePerfectButton {
          z-index: 4;
@@ -31,6 +31,10 @@
      #eventImage:hover {
          -webkit-filter: none;
          z-index: 2;
+     }
+
+     .footer {
+		width: 320px;
      }
      /*#movieImage {
 		left: 0;

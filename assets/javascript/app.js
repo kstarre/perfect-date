@@ -149,13 +149,8 @@ $(document).ready(function() {
     		eventObject = eventBriteResponse;
     		console.log(eventObject);
 
-    		var content =
-    			"<div id='#movieEventHolder' class='userChoice'>Displaying events around " + eventObject.location.augmented_location.city + ", " + eventObject.location.augmented_location.region + "<div><br>" +
-    			"<br><div id='#movieEventHolder' class='userChoice' >" + eventObject.events[0].name.html + "</div><br><br>" +
-    			"<div id='#movieEventHolder' class='userChoice'>" + eventObject.events[1].name.html + "</div><br><br>" +
-    			"<div id='#movieEventHolder' class='userChoice'>" + eventObject.events[2].name.html + "</div><br><br>" 
-    		;
-    	$("#movieEventHolder").html(content);
+    		var content = "<div>Displaying events around " + eventObject.location.augmented_location.city + ", " + eventObject.location.augmented_location.region + "</div><br>" + "<br><div class='userChoice' >" + eventObject.events[0].name.html + "</div><br><br>" + "<div class='userChoice'>" + eventObject.events[1].name.html + "</div><br><br>" + "<div class='userChoice'>" + eventObject.events[2].name.html + "</div><br><br>";
+    		$("#movieEventHolder").html(content);
 		});
 	});
 

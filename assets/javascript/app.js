@@ -9,77 +9,36 @@ $(document).ready(function() {
 	  messagingSenderId: "942714245613"
 	};
 	firebase.initializeApp(config);
-	var database = firebase.database();
 
 	// KS gracenote API 6n4cata848e7z3fha7nkgb77
 	// NS gracenote API zephc9snecc3dpg2eh66m4ng
 	// NM gracenote API mwe8tdv7qxnfckf89bjmeyab
 	// KS google places API AIzaSyBsKJtUzYMWM6ZpYy_eVpnfRbE4gWQY-d8
 
+	var database = firebase.database();
 	var location = 44131;
-	var latLong = {lat: 41.478044, lng: -81.684132};
+	var latLng;
+	// = {lat: 41.478044, lng: -81.684132};
 	var movieObject; 
 	var map;
+	var service;
 	var infowindow;
 	var marker;
 
-	function initialize() {
-
-		var mapOptions = {
-			center: new google.maps.LatLng(40.680898,-8.684059),
-			zoom: 10,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
+	function initMap() {
+		latLng = new google.maps.LatLng(41.478044,-81.684132);
+		map = new google.maps.Map(document.getElementById("mapHolder"), {
+			center: latLng,
+			zoom: 15
+		});
+		var request = {
+			location: latLng,
+			radius: '1000',
+			type: ['restaurant']
 		};
 
-		map = new google.maps.Map(document.getElementById("mapHolder"), mapOptions);
-
-	};
-
-	function searchAddress() {
-
-		var addressInput = $('#enteredZipCode').val();
-	  
-		//this is what the variable to pass will be
-		var geocoder = new google.maps.Geocoder();
-
-		geocoder.geocode({address: addressInput}, function(results, status) {
-
-			if (status == google.maps.GeocoderStatus.OK) {
-
-	      var myResult = results[0].geometry.location;
-
-	      createMarker(myResult);
-
-	      map.setCenter(myResult);
-
-	      map.setZoom(17);
-
-			}
-		});
-
-	};
-
-	function createMarker(latlng) {
-
-	  if(marker != undefined && marker != ''){
-	    marker.setMap(null);
-	    marker = '';
-	  }
-
-	  marker = new google.maps.Marker({
-	    map: map,
-	    position: latlng
-	  });
-	};
-
-	function initMap() {
-	       infowindow = new google.maps.InfoWindow();
-	       var service = new google.maps.places.PlacesService(map);
-	       service.nearbySearch({
-	         location: latLong,
-	         radius: 1000,
-	         type: ['restaurant']
-	       }, callback);
+	    service = new google.maps.places.PlacesService(map);
+	    service.nearbySearch(request, callback);
 	};
 
 	function callback(results, status) {
@@ -97,13 +56,12 @@ $(document).ready(function() {
 	    }
 	};
 	
-	// Loads Google map on window load
-	google.maps.event.addDomListener(window, 'load', initialize);
-
+	initMap();
+	
 	// Gracenote API
 	$("#movieImage").on("click", function() {
 		var date = moment().format("YYYY-MM-DD");
-		var apiKey = "mwe8tdv7qxnfckf89bjmeyab";
+		var apiKey = "6n4cata848e7z3fha7nkgb77";
 		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + location + "&api_key=" + apiKey;
 		$.ajax({
 			url: gracenoteQueryURL,
@@ -163,7 +121,7 @@ $(document).ready(function() {
 		for(var i = 0; i < movieObject.length; i++) {
 			var subsection = $("<div>");
 			var title = $("<p>");
-			subsection.addClass("movieChoice");
+			subsection.addClass("userChoice");
 			subsection.attr("data-name", movieObject[i].title);
 			title.html(movieObject[i].title);
 			subsection.append(title);

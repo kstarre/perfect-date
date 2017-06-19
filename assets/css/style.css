@@ -132,8 +132,8 @@ p {
 #mapHolder {
 	/*background-color: red;*/
 	color: white;
-	/*width: 400px;
-	height: 400px;*/
+	width: 400px;
+	height: 400px;
 	margin:20px;
 	display: inline-block;
 }

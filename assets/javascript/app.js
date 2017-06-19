@@ -89,7 +89,7 @@ $(document).ready(function() {
 /*	       	for(var i = 0; i > 4; i++) {
 	       		var subsection = $("<div>");
 	       		var restaurantName = $("<p>");
-	       		subsection.attr("id", "restaurantResult");
+	       		subsection.attr("class", "restaurant");
 	       		restaurantName.html(results[i].name);
 	       		subsection.html(restaurantName);
 	       		$("#food").append(subsection);

@@ -17,7 +17,7 @@ $(document).ready(function() {
 
 	var database = firebase.database();
 	var location = 44131;
-	var latLng;
+	var mapCenter;
 	// = {lat: 41.478044, lng: -81.684132};
 	var movieObject;
 	var map;
@@ -26,13 +26,13 @@ $(document).ready(function() {
 	var marker;
 
 	function initMap() {
-		latLng = new google.maps.LatLng(41.478044,-81.684132);
+		mapCenter = new google.maps.LatLng(41.478044,-81.684132);
 		map = new google.maps.Map(document.getElementById("mapHolder"), {
-			center: latLng,
+			center: mapCenter,
 			zoom: 15
 		});
 		var request = {
-			location: latLng,
+			location: mapCenter,
 			radius: '1000',
 			type: ['restaurant']
 		};
@@ -58,6 +58,7 @@ $(document).ready(function() {
 	       		subsection.append(restaurantPrice);
 	       		subsection.append(restaurantRating);
 	       		$("#restaurantList").append(subsection);
+	       		createMarker(results[i]);
 	       	}; 
 		}
 	};
@@ -67,7 +68,7 @@ $(document).ready(function() {
 	// Gracenote API
 	$("#movieImage").on("click", function() {
 		var date = moment().format("YYYY-MM-DD");
-		var apiKey = "6n4cata848e7z3fha7nkgb77";
+		var apiKey = "mwe8tdv7qxnfckf89bjmeyab";
 		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + location + "&api_key=" + apiKey;
 		$.ajax({
 			url: gracenoteQueryURL,

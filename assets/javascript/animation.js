@@ -67,12 +67,12 @@ eventImage.click(click);
 // Click on button animation
 button.click(click); 
 
-// Movie hover
-userChoice.hover(function(){
+// Movie and Event hover
+$(document).on("mouseenter", ".userChoice", function(){
 	TweenMax.to($(this), 1, {scale:1.2,});
-	},
-	function(){
-		TweenMax.to($(this), 1, {scale:1});
+});
+$(document).on("mouseleave", ".userChoice", function(){
+	TweenMax.to($(this), 1, {scale:1});
 });
 
 function showRestaurantDiv() {
@@ -80,15 +80,14 @@ function showRestaurantDiv() {
 	console.log(showRestaurantDiv);
 };
 
-userChoice.click(function(){
+$(document).on("click", ".userChoice", function(){
 	TweenMax.from(restaurantDiv, 1.5, {autoAlpha: 0, onStart: showRestaurantDiv});
 });
 
 // Restaurant hover
-restaurantChoice.hover(function(){
+$(document).on("mouseenter", ".restaurant", function(){
 	TweenMax.to($(this), 1, {scale:1.2,});
-	},
-	function(){
-		TweenMax.to($(this), 1, {scale:1});
 });
-
+$(document).on("mouseleave", ".restaurant", function(){
+	TweenMax.to($(this), 1, {scale:1});
+});

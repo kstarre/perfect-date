@@ -44,15 +44,17 @@ $(document).ready(function() {
 	function callback(results, status) {
 	    if (status === google.maps.places.PlacesServiceStatus.OK) {
 	       	console.log(results);
-	       	$("#food").html(results[0].name);
-/*	       	for(var i = 0; i > 4; i++) {
+	       	for(var i = 0; i > 4; i++) {
+	       		console.log(results[i].name);
 	       		var subsection = $("<div>");
 	       		var restaurantName = $("<p>");
 	       		subsection.attr("id", "restaurantResult");
+	       		subsection.addClass("restaurant");
 	       		restaurantName.html(results[i].name);
 	       		subsection.html(restaurantName);
 	       		$("#food").append(subsection);
-	       	};*/
+	       	};
+	       	
 	    }
 	};
 	

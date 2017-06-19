@@ -80,8 +80,11 @@ function showRestaurantDiv() {
 	console.log(showRestaurantDiv);
 };
 
+//$(document).on("click", ".userChoice", function() {
+
+
 userChoice.click(function(){
-	TweenMax.from(restaurantDiv, 1.5, {autoAlpha: 0, onStart: showRestaurantDiv});
+	TweenMax.from(restaurantDiv, 1.5, {onStart: showRestaurantDiv, autoAlpha: 0});
 });
 
 // Restaurant hover

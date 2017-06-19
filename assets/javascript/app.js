@@ -39,6 +39,31 @@ $(document).ready(function() {
 
 	    service = new google.maps.places.PlacesService(map);
 	    service.nearbySearch(request, callback);
+
+			//geolocation to capture position
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					var pos = {
+						lat: position.coords.latitude,
+						lng: position.coords.longitude
+					};
+					console.log(pos);
+
+				}, function() {
+					handleLocationError(true, infoWindow, map.getCenter());
+				});
+			} else {
+				// Browser doesn't support Geolocation
+				handleLocationError(false, infoWindow, map.getCenter());
+			}
+	};
+
+	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+		infoWindow.setPosition(pos);
+		infoWindow.setContent(browserHasGeolocation ?
+													'Error: The Geolocation service failed.' :
+													'Error: Your browser doesn\'t support geolocation.');
+		infoWindow.open(map);
 	};
 
 	function callback(results, status) {
@@ -58,9 +83,8 @@ $(document).ready(function() {
 	       		subsection.append(restaurantPrice);
 	       		subsection.append(restaurantRating);
 	       		$("#restaurantList").append(subsection);
-	       		createMarker(results[i]);
-	       	}; 
-		}
+	       	};
+	    };
 	};
 
 	initMap();
@@ -68,7 +92,7 @@ $(document).ready(function() {
 	// Gracenote API
 	$("#movieImage").on("click", function() {
 		var date = moment().format("YYYY-MM-DD");
-		var apiKey = "mwe8tdv7qxnfckf89bjmeyab";
+		var apiKey = "zephc9snecc3dpg2eh66m4ng";
 		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + location + "&api_key=" + apiKey;
 		$.ajax({
 			url: gracenoteQueryURL,
@@ -139,10 +163,11 @@ $(document).ready(function() {
 	// Event Brite API
 	// Initial load of data when clicking event panel
 	$("#eventImage").on("click", function() {
-    	var date = "&date_modified.keyword=this_week";
+    	//var date = "&date_modified.keyword=this_week";
     	var apiKey = "&token=WJ5ZSOV6TV56IC44E7EJ";
     	var location = "?location.address=44144";
-    	var eventBriteQueryURL = "https://www.eventbriteapi.com/v3/events/search/" + location + date + apiKey;
+    	var eventBriteQueryURL = "https://www.eventbriteapi.com/v3/events/search/" + location + apiKey;
+			console.log(eventBriteQueryURL);
     	$.ajax({
     		url: eventBriteQueryURL,
     		method: "GET"

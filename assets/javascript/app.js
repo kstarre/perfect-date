@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	// Katie Starrett - Initialize Firebase
+	// KS - Initialize Firebase
 	var config = {
 	  apiKey: "AIzaSyDwcSHlUcGR-WkLGizclGzfFnnig98aBew",
 	  authDomain: "perfect-date-82efd.firebaseapp.com",
@@ -44,16 +44,22 @@ $(document).ready(function() {
 	function callback(results, status) {
 	    if (status === google.maps.places.PlacesServiceStatus.OK) {
 	       	console.log(results);
-	       	$("#food").html(results[0].name);
-/*	       	for(var i = 0; i > 4; i++) {
+	       	for (var i = 0; i < 4; i++) {
 	       		var subsection = $("<div>");
 	       		var restaurantName = $("<p>");
+	       		var restaurantPrice = $("<p>");
+	       		var restaurantRating = $("<p>");
 	       		subsection.attr("id", "restaurantResult");
+	       		subsection.addClass("restaurant");
 	       		restaurantName.html(results[i].name);
-	       		subsection.html(restaurantName);
-	       		$("#food").append(subsection);
-	       	};*/
-	    }
+	       		restaurantPrice.html("Price Level: " + results[i].price_level + " out of 4");
+	       		restaurantRating.html("Rating: " + results[i].rating + " / 5.0");
+	       		subsection.append(restaurantName);
+	       		subsection.append(restaurantPrice);
+	       		subsection.append(restaurantRating);
+	       		$("#restaurantList").append(subsection);
+	       	}; 
+		}
 	};
 
 	initMap();
@@ -130,33 +136,30 @@ $(document).ready(function() {
 	});
 
 	// Event Brite API
-  //Initial load of data when clicking event panel
-  $("#eventImage").on("click", function() {
-    var date = "&date_modified.keyword=this_week"
-    var apiKey = "&token=WJ5ZSOV6TV56IC44E7EJ";
-    var location = "?location.address=44144";
-    var eventBriteQueryURL = "https://www.eventbriteapi.com/v3/events/search/" + location + date + apiKey;
-    $.ajax({
-      url: eventBriteQueryURL,
-      method: "GET"
-    }).done(function(eventBriteResponse) {
-      eventObject = eventBriteResponse;
-      console.log(eventObject);
+	// Initial load of data when clicking event panel
+	$("#eventImage").on("click", function() {
+    	var date = "&date_modified.keyword=this_week";
+    	var apiKey = "&token=WJ5ZSOV6TV56IC44E7EJ";
+    	var location = "?location.address=44144";
+    	var eventBriteQueryURL = "https://www.eventbriteapi.com/v3/events/search/" + location + date + apiKey;
+    	$.ajax({
+    		url: eventBriteQueryURL,
+    		method: "GET"
+    	}).done(function(eventBriteResponse) {
+    		eventObject = eventBriteResponse;
+    		console.log(eventObject);
 
-      var content =
-      "<div id='#movieEventHolder' class='userChoice'>Displaying events around " + eventObject.location.augmented_location.city + ", " + eventObject.location.augmented_location.region + "<div><br>" +
-      "<br><div id='#movieEventHolder' class='userChoice' >" + eventObject.events[0].name.html + "</div><br><br>" +
-      "<div id='#movieEventHolder' class='userChoice'>" + eventObject.events[1].name.html + "</div><br><br>" +
-      "<div id='#movieEventHolder' class='userChoice'>" + eventObject.events[2].name.html + "</div><br><br>" 
-      ;
-      $("#movieEventHolder").html(content);
+    		var content =
+    			"<div id='#movieEventHolder' class='userChoice'>Displaying events around " + eventObject.location.augmented_location.city + ", " + eventObject.location.augmented_location.region + "<div><br>" +
+    			"<br><div id='#movieEventHolder' class='userChoice' >" + eventObject.events[0].name.html + "</div><br><br>" +
+    			"<div id='#movieEventHolder' class='userChoice'>" + eventObject.events[1].name.html + "</div><br><br>" +
+    			"<div id='#movieEventHolder' class='userChoice'>" + eventObject.events[2].name.html + "</div><br><br>" 
+    		;
+    	$("#movieEventHolder").html(content);
+		});
+	});
 
-    });
-  });
-
-
-
-  //location query function
+	//location query function
 	$('#zipCode').click(function(){
 	    var zipCode = $('#enteredZipCode').val();
 	    console.log(zipCode);
@@ -177,13 +180,7 @@ $(document).ready(function() {
 		    	//console.log(event);
 		    	//console.log(event.events[0].logo.url);
 		    	//console.log (event.location.address);
-		    	var content =
-		    	"<div id='#movieEventHolder' class='userChoice'>Displaying events around " + event.location.augmented_location.city + ", " + event.location.augmented_location.region + "<div><br>" +
-		    	"<br><div id='#movieEventHolder' class='userChoice' >" + event.events[0].name.html + "</div><br><br>" +
-		    	"<div id='#movieEventHolder' class='userChoice'>" + event.events[1].name.html + "</div><br><br>" +
-		    	"<div id='#movieEventHolder' class='userChoice'>" + event.events[2].name.html + "</div><br><br>" +
-		    	"<div id='#movieEventHolder' class='userChoice'>" + event.events[3].name.html + "</div><br><br>"
-		    	;
+		    	var content = "<div class='userChoice'>Displaying events around " + event.location.augmented_location.city + ", " + event.location.augmented_location.region + "<div><br>" + "<br><div class='userChoice' >" + event.events[0].name.html + "</div><br><br>" + "<div class='userChoice'>" + event.events[1].name.html + "</div><br><br>" + "<div class='userChoice'>" + event.events[2].name.html + "</div><br><br>" + "<div class='userChoice'>" + event.events[3].name.html + "</div><br><br>";
 		    	$("#movieEventHolder").html(content);
 		    });
 		};

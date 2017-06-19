@@ -19,7 +19,7 @@ $(document).ready(function() {
 	var location = 44131;
 	var latLng;
 	// = {lat: 41.478044, lng: -81.684132};
-	var movieObject; 
+	var movieObject;
 	var map;
 	var service;
 	var infowindow;
@@ -57,9 +57,9 @@ $(document).ready(function() {
 	       	
 	    }
 	};
-	
+
 	initMap();
-	
+
 	// Gracenote API
 	$("#movieImage").on("click", function() {
 		var date = moment().format("YYYY-MM-DD");
@@ -132,6 +132,33 @@ $(document).ready(function() {
 	});
 
 	// Event Brite API
+  //Initial load of data when clicking event panel
+  $("#eventImage").on("click", function() {
+    var date = "&date_modified.keyword=this_week"
+    var apiKey = "&token=WJ5ZSOV6TV56IC44E7EJ";
+    var location = "?location.address=44144";
+    var eventBriteQueryURL = "https://www.eventbriteapi.com/v3/events/search/" + location + date + apiKey;
+    $.ajax({
+      url: eventBriteQueryURL,
+      method: "GET"
+    }).done(function(eventBriteResponse) {
+      eventObject = eventBriteResponse;
+      console.log(eventObject);
+
+      var content =
+      "<div id='#movieEventHolder' class='userChoice'>Displaying events around " + eventObject.location.augmented_location.city + ", " + eventObject.location.augmented_location.region + "<div><br>" +
+      "<br><div id='#movieEventHolder' class='userChoice' >" + eventObject.events[0].name.html + "</div><br><br>" +
+      "<div id='#movieEventHolder' class='userChoice'>" + eventObject.events[1].name.html + "</div><br><br>" +
+      "<div id='#movieEventHolder' class='userChoice'>" + eventObject.events[2].name.html + "</div><br><br>" 
+      ;
+      $("#movieEventHolder").html(content);
+
+    });
+  });
+
+
+
+  //location query function
 	$('#zipCode').click(function(){
 	    var zipCode = $('#enteredZipCode').val();
 	    console.log(zipCode);

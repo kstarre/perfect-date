@@ -13,16 +13,16 @@ var userChoice = $(".userChoice");
 var restaurantDiv = $("#food");
 
 // On load for site
-TweenMax.from(logo, 2, {ease: Back.easeOut.config(2), x: -1000, onStart: hide2ndPage});
+TweenMax.from(logo, 2, {ease: Back.easeOut.config(2), x: -1000/*, onStart: hide2ndPage*/});
 TweenMax.from([perfectButton, buttonText], 2, {autoAlpha: 0, rotation: 360, delay: 1.5});// Spins button and text
 
-function hide2ndPage(){
+/*function hide2ndPage(){
 	$(".container").hide();
 };
 
 function show2ndPage(){
 	$(".container").show();
-};
+};*/
 
 // Image enlarge on hover
 movieImage.hover(function() {

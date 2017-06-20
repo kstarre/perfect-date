@@ -15,6 +15,9 @@ $(document).ready(function() {
 	// NM gracenote API mwe8tdv7qxnfckf89bjmeyab
 	// KS google places API AIzaSyBsKJtUzYMWM6ZpYy_eVpnfRbE4gWQY-d8
 
+	var recentMovie;
+	var recentEvent;
+	var recentRestaurant;
 	var movieChosen;
 	var movieAPIkey = "mwe8tdv7qxnfckf89bjmeyab";
 	var database = firebase.database();
@@ -31,6 +34,35 @@ $(document).ready(function() {
 	var posLng;
 	var zipCode;
 
+	database.ref('/movieList').once("value", function(snapshot) {
+		var movieList = snapshot.val();
+		var array = Object.keys(movieList);
+		var lastIndex = array.length - 1;
+		var lastKey = array[lastIndex];
+		recentMovie = movieList[lastKey].movie;
+	}, function(errorObject) {
+		console.log("The read failed: " + errorObject.code);
+	});
+
+	database.ref('/eventList').once("value", function(snapshot) {
+		var eventList = snapshot.val();
+		var array = Object.keys(eventList);
+		var lastIndex = array.length - 1;
+		var lastKey = array[lastIndex];
+		recentEvent = eventList[lastKey].event;
+	}, function(errorObject) {
+		console.log("The read failed: " + errorObject.code);
+	});
+
+	database.ref('/restaurantList').once("value", function(snapshot) {
+		var restaurantList = snapshot.val();
+		var array = Object.keys(restaurantList);
+		var lastIndex = array.length - 1;
+		var lastKey = array[lastIndex];
+		recentRestaurant = restaurantList[lastKey].restaurant;
+	}, function(errorObject) {
+		console.log("The read failed: " + errorObject.code);
+	});
 
 	function initMap() {
 
@@ -138,6 +170,29 @@ $(document).ready(function() {
 				$("#movieEventHolder").append(subsection);
 			};
 		});
+	});
+
+	// when user clicks perfectButton, load recently chosen movie and event
+	$("#perfectButton").on("click", function() {
+		var movieSubsection = $("<div>");
+		var eventSubsection = $("<div>");
+		var movieIntro = $("<div>");
+		var eventIntro = $("<div>");
+		var movieTitle = $("<div>");
+		var eventTitle = $("<div>");
+		movieIntro.html("Recently chosen movie:");
+		eventIntro.html("Recently chosen event:");
+		movieTitle.html(recentMovie);
+		movieTitle.addClass("userChoice");
+		movieSubsection.append(movieIntro);
+		movieSubsection.append(movieTitle);
+		eventTitle.html(recentEvent);
+		eventTitle.addClass("userChoice");
+		eventSubsection.append(eventIntro);
+		eventSubsection.append(eventTitle);
+		$("#movieEventHolder").html(movieSubsection);
+		$("#movieEventHolder").append(eventSubsection);
+
 	});
 
 	// Renders list of movies or events and data persistance for movies/ events...

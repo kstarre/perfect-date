@@ -15,11 +15,14 @@ $(document).ready(function() {
 	// NM gracenote API mwe8tdv7qxnfckf89bjmeyab
 	// KS google places API AIzaSyBsKJtUzYMWM6ZpYy_eVpnfRbE4gWQY-d8
 
+	var movieChosen;
 	var database = firebase.database();
 	var location = 44131;
 	var mapCenter;
 	// = {lat: 41.478044, lng: -81.684132};
 	var movieObject;
+	var restaurantObject;
+	var eventObject;
 	var map;
 	var service;
 	var infowindow;
@@ -40,22 +43,22 @@ $(document).ready(function() {
 	    service = new google.maps.places.PlacesService(map);
 	    service.nearbySearch(request, callback);
 
-			//geolocation to capture position
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(function(position) {
-					var pos = {
-						lat: position.coords.latitude,
-						lng: position.coords.longitude
-					};
-					console.log(pos);
+		//geolocation to capture position
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				var pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+				console.log(pos);
 
-				}, function() {
-					handleLocationError(true, infoWindow, map.getCenter());
-				});
-			} else {
-				// Browser doesn't support Geolocation
-				handleLocationError(false, infoWindow, map.getCenter());
-			}
+			}, function() {
+				handleLocationError(true, infoWindow, map.getCenter());
+			});
+		} else {
+			// Browser doesn't support Geolocation
+			handleLocationError(false, infoWindow, map.getCenter());
+		}
 	};
 
 	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -69,6 +72,7 @@ $(document).ready(function() {
 	function callback(results, status) {
 	    if (status === google.maps.places.PlacesServiceStatus.OK) {
 	       	console.log(results);
+	       	restaurantObject = results;
 	       	for (var i = 0; i < 4; i++) {
 	       		var subsection = $("<div>");
 	       		var restaurantName = $("<p>");
@@ -76,6 +80,7 @@ $(document).ready(function() {
 	       		var restaurantRating = $("<p>");
 	       		subsection.attr("id", "restaurantResult");
 	       		subsection.addClass("restaurant");
+	       		subsection.attr("data-name", results[i].name);
 	       		restaurantName.html(results[i].name);
 	       		restaurantPrice.html("Price Level: " + results[i].price_level + " out of 4");
 	       		restaurantRating.html("Rating: " + results[i].rating + " / 5.0");
@@ -89,8 +94,9 @@ $(document).ready(function() {
 
 	initMap();
 
-	// Gracenote API
+	// Gracenote API for movies near a certain zipcode, for today...
 	$("#movieImage").on("click", function() {
+		var movieChosen = true;
 		var date = moment().format("YYYY-MM-DD");
 		var apiKey = "zephc9snecc3dpg2eh66m4ng";
 		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + location + "&api_key=" + apiKey;
@@ -99,7 +105,7 @@ $(document).ready(function() {
 			method: "GET"
 		}).done(function(gracenoteResponse) {
 			movieObject = gracenoteResponse;
-			console.log(movieObject);
+			//console.log(movieObject);
 
 			for (var i = 0; i < gracenoteResponse.length; i++) {
 				var subsection = $("<div>");
@@ -113,40 +119,65 @@ $(document).ready(function() {
 		});
 	});
 
+	// Renders list of movies or  and data persistance for movies/ events...
 	$(document).on("click", ".userChoice", function() {
-		for(var i = 0; i < movieObject.length; i++) {
-			if( $(this).attr("data-name") === movieObject[i].title) {
-				var subsection = $("<div>");
-				var title = $("<div>");
-				var timeTable = $("<table>");
-				var goBack = $("<button>");
-				subsection.addClass("panel panel-default");
-				title.addClass("panel heading");
-				timeTable.addClass("table");
-				goBack.html("Want a different movie?");
-				goBack.attr("id", "goBackButton");
-				title.html(movieObject[i].title);
-				subsection.append(title);
-				for (var j = 0; j < movieObject[i].showtimes.length; j++) {
-					var tableRow = $("<tr>");
-					var time = $("<td>");
-					var theater = $("<td>");
-					time.html(moment(movieObject[i].showtimes[j].dateTime).format("h:mm A"));
-					theater.html(movieObject[i].showtimes[j].theatre.name);
-					tableRow.append(time);
-					tableRow.append(theater);
-					timeTable.append(tableRow);
+		if (movieChosen) {
+			for (var i = 0; i < movieObject.length; i++) {
+				if( $(this).attr("data-name") === movieObject[i].title) {
+					var subsection = $("<div>");
+					var title = $("<div>");
+					var timeTable = $("<table>");
+					var goBack = $("<button>");
+					subsection.addClass("panel panel-default");
+					title.addClass("panel heading");
+					timeTable.addClass("table");
+					goBack.html("Want a different movie?");
+					goBack.attr("id", "goBackButton");
+					title.html(movieObject[i].title);
+					subsection.append(title);
+					for (var j = 0; j < movieObject[i].showtimes.length; j++) {
+						var tableRow = $("<tr>");
+						var time = $("<td>");
+						var theater = $("<td>");
+						time.html(moment(movieObject[i].showtimes[j].dateTime).format("h:mm A"));
+						theater.html(movieObject[i].showtimes[j].theatre.name);
+						tableRow.append(time);
+						tableRow.append(theater);
+						timeTable.append(tableRow);
+					};
+					subsection.append(timeTable);
+					$("#movieEventHolder").html(subsection);
+					$("#movieEventHolder").append(goBack);
+					database.ref('/movieList').push( {
+						movie: movieObject[i].title
+					});
+				}
+			};
+		}
+		else {
+			for (var prop in eventObject.events) {
+				if( $(this).attr("data-name") === eventObject.events[prop].name.html) {
+					var subsection = $("<div>");
+					var title = $("<div>");
+					var description = $("<div>");
+					var goBack = $("<button>");
+					goBack.html("Want a different event?");
+					goBack.attr("id", "goBackButton");
+					title.html(eventObject.events[prop].name.html);
+					description.html(eventObject.events[prop].description.html);
+					subsection.append(title);
+					subsection.append(description);
+					$("#movieEventHolder").html(subsection);
+					$("#movieEventHolder").append(goBack);
+					database.ref('/eventList').push( {
+						event: eventObject.events[prop].name.html
+					});
 				};
-				subsection.append(timeTable);
-				$("#movieEventHolder").html(subsection);
-				$("#movieEventHolder").append(goBack);
-				database.ref('/movieList').push( {
-					movie: movieObject[i].title
-				});
 			}
-		};
+		}
 	});
 
+	// Allows user to return to movie list...
 	$(document).on("click", "#goBackButton", function() {
 		$("#movieEventHolder").empty();
 		for(var i = 0; i < movieObject.length; i++) {
@@ -160,10 +191,36 @@ $(document).ready(function() {
 		};
 	});
 
+	// Restaurant data persistance on click...
+	$(document).on("click", ".restaurant", function() {
+		for (var i = 0; i < restaurantObject.length; i++) {
+			if ( $(this).attr("data-name") === restaurantObject[i].name) {
+				var subsection = $("<div>");
+	       		var restaurantName = $("<p>");
+	       		var restaurantPrice = $("<p>");
+	       		var restaurantRating = $("<p>");
+	       		subsection.attr("id", "restaurantResult");
+	       		subsection.addClass("restaurant");
+	       		restaurantName.html(restaurantObject[i].name);
+	       		restaurantPrice.html("Price Level: " + restaurantObject[i].price_level + " out of 4");
+	       		restaurantRating.html("Rating: " + restaurantObject[i].rating + " / 5.0");
+	       		subsection.append(restaurantName);
+	       		subsection.append(restaurantPrice);
+	       		subsection.append(restaurantRating);
+	       		$("#restaurantList").html(subsection);
+	       		database.ref('/restaurantList').push( {
+	       			restaurant: restaurantObject[i].name,
+	       			location: restaurantObject[i].vicinity
+	       		});
+			}
+		}
+	});
+
 	// Event Brite API
 	// Initial load of data when clicking event panel
 	$("#eventImage").on("click", function() {
     	//var date = "&date_modified.keyword=this_week";
+    	var movieChosen = false;
     	var apiKey = "&token=WJ5ZSOV6TV56IC44E7EJ";
     	var location = "?location.address=44144";
     	var eventBriteQueryURL = "https://www.eventbriteapi.com/v3/events/search/" + location + apiKey;
@@ -174,9 +231,19 @@ $(document).ready(function() {
     	}).done(function(eventBriteResponse) {
     		eventObject = eventBriteResponse;
     		console.log(eventObject);
-
-    		var content = "<div>Displaying events around " + eventObject.location.augmented_location.city + ", " + eventObject.location.augmented_location.region + "</div><br>" + "<br><div class='userChoice' >" + eventObject.events[0].name.html + "</div><br><br>" + "<div class='userChoice'>" + eventObject.events[1].name.html + "</div><br><br>" + "<div class='userChoice'>" + eventObject.events[2].name.html + "</div><br><br>";
-    		$("#movieEventHolder").html(content);
+    		var display = $("<div>");
+    		display.html("Displaying events in " + eventObject.location.augmented_location.city + ", " + eventObject.location.augmented_location.region);
+    		$("#movieEventHolder").html(display);
+    		for (var prop in eventObject.events) {
+    			//console.log( eventObject.events[prop].name.html );
+    			var subsection = $("<div>");
+    			var title = $("<div>");
+    			subsection.addClass("userChoice");
+    			subsection.attr("data-name", eventObject.events[prop].name.html);
+    			title.html(eventObject.events[prop].name.html);
+    			subsection.html(title);
+    			$("#movieEventHolder").append(subsection);
+    		}
 		});
 	});
 
@@ -207,4 +274,5 @@ $(document).ready(function() {
 		};
 	//closing if/else statement
 	});
+
 });

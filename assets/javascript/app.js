@@ -18,9 +18,7 @@ $(document).ready(function() {
 	var movieChosen;
 	var movieAPIkey = "mwe8tdv7qxnfckf89bjmeyab";
 	var database = firebase.database();
-	var location = 44131;
 	var mapCenter;
-	// = {lat: 41.478044, lng: -81.684132};
 	var movieObject;
 	var restaurantObject;
 	var eventObject;
@@ -28,57 +26,57 @@ $(document).ready(function() {
 	var service;
 	var infowindow;
 	var marker;
-
-
+	var zipCodeObject;
+	var posLat;
+	var posLng;
+	var zipCode;
 
 
 	function initMap() {
-		mapCenter = new google.maps.LatLng(41.478044,-81.684132);
-		map = new google.maps.Map(document.getElementById("mapHolder"), {
-			center: mapCenter,
-			zoom: 15
-		});
-		var request = {
-			location: mapCenter,
-			radius: '1000',
-			type: ['restaurant']
-		};
-
-	    service = new google.maps.places.PlacesService(map);
-	    service.nearbySearch(request, callback);
 
 		//geolocation to capture position
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
-				var posLat = position.coords.latitude;
-				var	posLng = position.coords.longitude;
+				posLat = position.coords.latitude;
+				posLng = position.coords.longitude;
 				console.log(posLat);
 				console.log(posLng);
 				//reverse geocoding to obtain zip code
 				var zipCodeURL = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + posLat + "," + posLng + "&sensor=true";
-			  console.log(zipCodeURL);
+			  	//console.log(zipCodeURL);
 				$.ajax({
 					url: zipCodeURL,
 					method: "GET"
 				}).done(function(zipCodeResponse) {
 					zipCodeObject = zipCodeResponse;
-					console.log(zipCodeObject.results["0"].address_components[7].long_name);
+					zipCode = zipCodeObject.results[2].address_components[0].short_name;
+					//console.log(zipCode);
+					//console.log(zipCodeObject);
+					//console.log(zipCodeObject.results["0"].address_components[7].long_name);
 					mapCenter = new google.maps.LatLng(posLat,posLng);
 					map = new google.maps.Map(document.getElementById("mapHolder"), {
 						center: mapCenter,
-						zoom: 15
+						zoom: 13
 					});
+					var request = {
+						location: mapCenter,
+						radius: '1000',
+						type: ['restaurant']
+					};
+
+					service = new google.maps.places.PlacesService(map);
+					service.nearbySearch(request, callback);
 				});
 				var pos = {
 					lat: position.coords.latitude,
 					lng: position.coords.longitude
 				};
 				console.log(pos);
-
 			}, function() {
 				handleLocationError(true, infoWindow, map.getCenter());
 			});
-		} else {
+		} 
+		else {
 			// Browser doesn't support Geolocation
 			handleLocationError(false, infoWindow, map.getCenter());
 		}
@@ -122,7 +120,7 @@ $(document).ready(function() {
 	$("#movieImage").on("click", function() {
 		movieChosen = true;
 		var date = moment().format("YYYY-MM-DD");
-		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + location + "&api_key=" + movieAPIkey;
+		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + zipCode + "&api_key=" + movieAPIkey;
 		$.ajax({
 			url: gracenoteQueryURL,
 			method: "GET"
@@ -232,44 +230,6 @@ $(document).ready(function() {
 		}
 	});
 
-	// Allows user to return to movie list...
-	$(document).on("click", "#goBackButton", function() {
-		$("#movieEventHolder").empty();
-		for(var i = 0; i < movieObject.length; i++) {
-			var subsection = $("<div>");
-			var title = $("<p>");
-			subsection.addClass("userChoice");
-			subsection.attr("data-name", movieObject[i].title);
-			title.html(movieObject[i].title);
-			subsection.append(title);
-			$("#movieEventHolder").append(subsection);
-		};
-
-	// Restaurant data persistance on click...
-	$(document).on("click", ".restaurant", function() {
-		for (var i = 0; i < restaurantObject.length; i++) {
-			if ( $(this).attr("data-name") === restaurantObject[i].name) {
-				var subsection = $("<div>");
-	       		var restaurantName = $("<p>");
-	       		var restaurantPrice = $("<p>");
-	       		var restaurantRating = $("<p>");
-	       		subsection.attr("id", "restaurantResult");
-	       		subsection.addClass("restaurant");
-	       		restaurantName.html(restaurantObject[i].name);
-	       		restaurantPrice.html("Price Level: " + restaurantObject[i].price_level + " out of 4");
-	       		restaurantRating.html("Rating: " + restaurantObject[i].rating + " / 5.0");
-	       		subsection.append(restaurantName);
-	       		subsection.append(restaurantPrice);
-	       		subsection.append(restaurantRating);
-	       		$("#restaurantList").html(subsection);
-	       		database.ref('/restaurantList').push( {
-	       			restaurant: restaurantObject[i].name,
-	       			location: restaurantObject[i].vicinity
-	       		});
-			}
-		}
-	});
-
 	// Restaurant data persistance on click...
 	$(document).on("click", ".restaurant", function() {
 		for (var i = 0; i < restaurantObject.length; i++) {
@@ -301,8 +261,7 @@ $(document).ready(function() {
     	//var date = "&date_modified.keyword=this_week";
     	movieChosen = false;
     	var apiKey = "&token=WJ5ZSOV6TV56IC44E7EJ";
-    	var location = "?location.address=44144";
-    	var eventBriteQueryURL = "https://www.eventbriteapi.com/v3/events/search/" + location + apiKey;
+    	var eventBriteQueryURL = "https://www.eventbriteapi.com/v3/events/search/?location.address=" + zipCode + apiKey;
 		//console.log(eventBriteQueryURL);
     	$.ajax({
     		url: eventBriteQueryURL,
@@ -325,18 +284,19 @@ $(document).ready(function() {
     		}
 		});
 	});
+
 	//location query function
 	$('#zipCode').click(function(){
-	    var zipCode = $('#enteredZipCode').val();
+	    var zipCodeManual = $('#enteredZipCode').val();
 	    //console.log(zipCode);
 		//var enteredName = document.getElementById('enteredFormName').value.replace(' ', '+');
-	    if (zipCode.length != 5) {
+	    if (zipCodeManual.length != 5) {
 	    	$('#movieEventHolder').html("Invalid zip code");
 	    }
 	    else {
 	    	if (movieChosen) {
 	    		var date = moment().format("YYYY-MM-DD");
-	    		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + zipCode + "&api_key=" + movieAPIkey;
+	    		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + zipCodeManual + "&api_key=" + movieAPIkey;
 	    		$.ajax({
 	    			url: gracenoteQueryURL,
 	    			method: "GET"
@@ -357,7 +317,7 @@ $(document).ready(function() {
 	    	}
 			else {
 			    //Ajax Request
-			    var queryURL = "https://www.eventbriteapi.com/v3/events/search/?token=WJ5ZSOV6TV56IC44E7EJ&location.address=" + zipCode;
+			    var queryURL = "https://www.eventbriteapi.com/v3/events/search/?token=WJ5ZSOV6TV56IC44E7EJ&location.address=" + zipCodeManual;
 			    $.ajax({
 			    	url: queryURL,
 			    	method: "GET"
@@ -379,5 +339,4 @@ $(document).ready(function() {
 			}
 		};
 	});
-
 });

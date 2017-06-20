@@ -179,16 +179,34 @@ $(document).ready(function() {
 
 	// Allows user to return to movie list...
 	$(document).on("click", "#goBackButton", function() {
-		$("#movieEventHolder").empty();
-		for(var i = 0; i < movieObject.length; i++) {
-			var subsection = $("<div>");
-			var title = $("<p>");
-			subsection.addClass("userChoice");
-			subsection.attr("data-name", movieObject[i].title);
-			title.html(movieObject[i].title);
-			subsection.append(title);
-			$("#movieEventHolder").append(subsection);
-		};
+		if (movieChosen) {
+			$("#movieEventHolder").empty();
+			for(var i = 0; i < movieObject.length; i++) {
+				var subsection = $("<div>");
+				var title = $("<p>");
+				subsection.addClass("userChoice");
+				subsection.attr("data-name", movieObject[i].title);
+				title.html(movieObject[i].title);
+				subsection.append(title);
+				$("#movieEventHolder").append(subsection);
+			};
+		}
+		else {
+			$("#movieEventHolder").empty();
+			var display = $("<div>");
+			display.html("Displaying events in " + eventObject.location.augmented_location.city + ", " + eventObject.location.augmented_location.region);
+			$("#movieEventHolder").html(display);
+			for (var prop in eventObject.events) {
+				//console.log( eventObject.events[prop].name.html );
+				var subsection = $("<div>");
+				var title = $("<div>");
+				subsection.addClass("userChoice");
+				subsection.attr("data-name", eventObject.events[prop].name.html);
+				title.html(eventObject.events[prop].name.html);
+				subsection.html(title);
+				$("#movieEventHolder").append(subsection);
+			}
+		}
 	});
 
 	// Restaurant data persistance on click...
@@ -256,20 +274,25 @@ $(document).ready(function() {
 	    	$('#movieEventHolder').html("Invalid zip code");
 	    }
 	    else {
-	    	$('#movieEventHolder').val("Displaying events around " + zipCode);
+	    	var display = $("<div>");
+	    	display.html("Displaying events around " + eventObject.location.augmented_location.city + ", " + eventObject.location.augmented_location.region);
+		    $("#movieEventHolder").html(display);
 		    //Ajax Request
 		    var queryURL = "https://www.eventbriteapi.com/v3/events/search/?token=WJ5ZSOV6TV56IC44E7EJ&location.address=" + zipCode;
-
 		    $.ajax({
 		    	url: queryURL,
 		    	method: "GET"
 		    }).done(function (event) {
-		    	//full object
-		    	//console.log(event);
-		    	//console.log(event.events[0].logo.url);
-		    	//console.log (event.location.address);
-		    	var content = "<div>Displaying events around " + event.location.augmented_location.city + ", " + event.location.augmented_location.region + "</div><br>" + "<br><div class='userChoice' >" + event.events[0].name.html + "</div><br><br>" + "<div class='userChoice'>" + event.events[1].name.html + "</div><br><br>" + "<div class='userChoice'>" + event.events[2].name.html + "</div><br><br>" + "<div class='userChoice'>" + event.events[3].name.html + "</div><br><br>";
-		    	$("#movieEventHolder").html(content);
+		    	for (var prop in eventObject.events) {
+		    		//console.log( eventObject.events[prop].name.html );
+		    		var subsection = $("<div>");
+		    		var title = $("<div>");
+		    		subsection.addClass("userChoice");
+		    		subsection.attr("data-name", eventObject.events[prop].name.html);
+		    		title.html(eventObject.events[prop].name.html);
+		    		subsection.html(title);
+		    		$("#movieEventHolder").append(subsection);
+		    	}
 		    });
 		};
 	//closing if/else statement

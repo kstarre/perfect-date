@@ -149,7 +149,7 @@ input {
 }
 #mapHolder {
 	color: white;
-	width: 380px;
+	width: 400px;
 	height: 240px;
 	margin: 20px;
 	display: inline-block;
@@ -162,9 +162,12 @@ input {
 	margin-bottom: 2%;
 }
 
-.searchContainer {
+.searchCriteria {
     margin-top: 16%;
+    margin-left: 40px;
 }
+
+
 
 #food {
 	/*background-color: green;

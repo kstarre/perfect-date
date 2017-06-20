@@ -4,7 +4,7 @@
     /*Opening Page*/
     #eventImage {
         z-index: 3;
-         
+
     }
     .textAbovePerfectButton {
         z-index: 4;
@@ -32,26 +32,35 @@
         z-index: 2;
     }
 
+    .panel-body{
+        padding: none;
+    }
+
+    #mapHolder {
+        width: 200px;
+        float: left;
+    }
+
     .footer {
-	width: 320px;
+    width: 320px;
     }
      /*#movieImage {
-		left: 0;
-		width: 50%;
-	}
-	#eventImage {
-		left:50%;
-		width: 50%
-		top:0;
-		bottom: 0;
-	}
-	main page
-	#mapHolder{
-		height: 200px;
-		width: 400px;
-	}
-	#movieEventHolder {
-		height: 200px;
-		width: 400px;
-	}
+        left: 0;
+        width: 50%;
+    }
+    #eventImage {
+        left:50%;
+        width: 50%
+        top:0;
+        bottom: 0;
+    }
+    main page
+    #mapHolder{
+        height: 200px;
+        width: 400px;
+    }
+    #movieEventHolder {
+        height: 200px;
+        width: 400px;
+    }
 }*/

@@ -29,6 +29,9 @@ $(document).ready(function() {
 	var infowindow;
 	var marker;
 
+
+
+
 	function initMap() {
 		mapCenter = new google.maps.LatLng(41.478044,-81.684132);
 		map = new google.maps.Map(document.getElementById("mapHolder"), {
@@ -47,6 +50,25 @@ $(document).ready(function() {
 		//geolocation to capture position
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
+				var posLat = position.coords.latitude;
+				var	posLng = position.coords.longitude;
+				console.log(posLat);
+				console.log(posLng);
+				//reverse geocoding to obtain zip code
+				var zipCodeURL = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + posLat + "," + posLng + "&sensor=true";
+			  console.log(zipCodeURL);
+				$.ajax({
+					url: zipCodeURL,
+					method: "GET"
+				}).done(function(zipCodeResponse) {
+					zipCodeObject = zipCodeResponse;
+					console.log(zipCodeObject.results["0"].address_components[7].long_name);
+					mapCenter = new google.maps.LatLng(posLat,posLng);
+					map = new google.maps.Map(document.getElementById("mapHolder"), {
+						center: mapCenter,
+						zoom: 15
+					});
+				});
 				var pos = {
 					lat: position.coords.latitude,
 					lng: position.coords.longitude
@@ -210,6 +232,44 @@ $(document).ready(function() {
 		}
 	});
 
+	// Allows user to return to movie list...
+	$(document).on("click", "#goBackButton", function() {
+		$("#movieEventHolder").empty();
+		for(var i = 0; i < movieObject.length; i++) {
+			var subsection = $("<div>");
+			var title = $("<p>");
+			subsection.addClass("userChoice");
+			subsection.attr("data-name", movieObject[i].title);
+			title.html(movieObject[i].title);
+			subsection.append(title);
+			$("#movieEventHolder").append(subsection);
+		};
+
+	// Restaurant data persistance on click...
+	$(document).on("click", ".restaurant", function() {
+		for (var i = 0; i < restaurantObject.length; i++) {
+			if ( $(this).attr("data-name") === restaurantObject[i].name) {
+				var subsection = $("<div>");
+	       		var restaurantName = $("<p>");
+	       		var restaurantPrice = $("<p>");
+	       		var restaurantRating = $("<p>");
+	       		subsection.attr("id", "restaurantResult");
+	       		subsection.addClass("restaurant");
+	       		restaurantName.html(restaurantObject[i].name);
+	       		restaurantPrice.html("Price Level: " + restaurantObject[i].price_level + " out of 4");
+	       		restaurantRating.html("Rating: " + restaurantObject[i].rating + " / 5.0");
+	       		subsection.append(restaurantName);
+	       		subsection.append(restaurantPrice);
+	       		subsection.append(restaurantRating);
+	       		$("#restaurantList").html(subsection);
+	       		database.ref('/restaurantList').push( {
+	       			restaurant: restaurantObject[i].name,
+	       			location: restaurantObject[i].vicinity
+	       		});
+			}
+		}
+	});
+
 	// Restaurant data persistance on click...
 	$(document).on("click", ".restaurant", function() {
 		for (var i = 0; i < restaurantObject.length; i++) {
@@ -265,7 +325,6 @@ $(document).ready(function() {
     		}
 		});
 	});
-
 	//location query function
 	$('#zipCode').click(function(){
 	    var zipCode = $('#enteredZipCode').val();

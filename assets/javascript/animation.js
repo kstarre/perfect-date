@@ -14,10 +14,9 @@ var restaurantDiv = $("#food");
 
 
 // On load for site
-TweenMax.from(logo, 1.25, {ease: Back.easeOut.config(2), x: -1000});
-/*TweenMax.from(logo, 2, {ease: Back.easeOut.config(2), x: -1000});
+TweenMax.from(logo, 2, {ease: Back.easeOut.config(2), x: -1000});
 TweenMax.from([perfectButton, buttonText], 2, {autoAlpha: 0, rotation: 360, delay: 1.5});// Spins button and text
-*/
+
 // Image enlarge on hover
 movieImage.hover(function() {
 	// Increase scale

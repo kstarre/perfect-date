@@ -50,12 +50,12 @@ function click() {
 // Hide opening page div onComplete
 function hideOpeningPage() {
 	$("#openingPage").hide();// hides opening page
-	console.log(hideOpeningPage);
+	//console.log(hideOpeningPage);
 };
 
 function hideRestaurantDiv() {
 	$("#food").hide();
-	console.log(hideRestaurantDiv);
+	//console.log(hideRestaurantDiv);
 };
 
 // Click on left image - both images move off page
@@ -77,7 +77,7 @@ $(document).on("mouseleave", ".userChoice", function(){
 
 function showRestaurantDiv() {
 	$('#food').show();
-	console.log(showRestaurantDiv);
+	//console.log(showRestaurantDiv);
 };
 
 $(document).on("click", ".userChoice", function(){

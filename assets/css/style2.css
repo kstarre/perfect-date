@@ -6,7 +6,7 @@
         z-index: 3;
     }
     #headerLogo {
-        
+        width: 200px;
     }
     .textAbovePerfectButton {
         z-index: 4;
@@ -50,12 +50,13 @@
         width: 300px;
     }
 
+    .searchCriteria {
+        margin-top: 0;
+        margin-left: 12%;
+    }
+
     .searchContainer {
-        margin-top: none;
-        position: fixed;
-        top: 0;
-        left:0;
-        z-index: 6;
+        margin-top: 2%;
     }
     /*#movieImage {
         left: 0;

@@ -1,10 +1,12 @@
-/* Media Queries */
+    /* Media Queries */
 
-@media only screen (max-width: 414px) {
+@media only screen and (max-width: 414px) {
     /*Opening Page*/
     #eventImage {
         z-index: 3;
-
+    }
+    #headerLogo {
+        
     }
     .textAbovePerfectButton {
         z-index: 4;
@@ -22,6 +24,7 @@
         display: inline-block;
         z-index: 1;
         -webkit-filter: brightness(80%);
+        height: 736px;
     }
     #movieImage:hover {
         -webkit-filter: none;
@@ -31,20 +34,30 @@
         -webkit-filter: none;
         z-index: 2;
     }
-
-    .panel-body{
-        padding: none;
-    }
-
-    #mapHolder {
-        width: 200px;
-        float: left;
-    }
-
     .footer {
-    width: 320px;
+        width: 320px;
     }
-     /*#movieImage {
+    #mapHolder {
+        width: 230px;
+        margin: 5;
+    }
+    #movieEventHolder {
+        width: 230px;
+    }
+
+    #food {
+        margin-left: 15%;
+        width: 300px;
+    }
+
+    .searchContainer {
+        margin-top: none;
+        position: fixed;
+        top: 0;
+        left:0;
+        z-index: 6;
+    }
+    /*#movieImage {
         left: 0;
         width: 50%;
     }

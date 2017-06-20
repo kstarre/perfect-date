@@ -16,6 +16,7 @@ $(document).ready(function() {
 	// KS google places API AIzaSyBsKJtUzYMWM6ZpYy_eVpnfRbE4gWQY-d8
 
 	var movieChosen;
+	var movieAPIkey = "mwe8tdv7qxnfckf89bjmeyab";
 	var database = firebase.database();
 	var location = 44131;
 	var mapCenter;
@@ -49,7 +50,6 @@ $(document).ready(function() {
 		//geolocation to capture position
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
-<<<<<<< HEAD
 				var posLat = position.coords.latitude;
 				var	posLng = position.coords.longitude;
 				console.log(posLat);
@@ -69,13 +69,11 @@ $(document).ready(function() {
 						zoom: 15
 					});
 				});
-=======
 				var pos = {
 					lat: position.coords.latitude,
 					lng: position.coords.longitude
 				};
 				console.log(pos);
->>>>>>> bf1cf12a545053364e511fc5f5fcdebce2ab5926
 
 			}, function() {
 				handleLocationError(true, infoWindow, map.getCenter());
@@ -94,9 +92,10 @@ $(document).ready(function() {
 		infoWindow.open(map);
 	};
 
+	// Render results from google places api
 	function callback(results, status) {
 	    if (status === google.maps.places.PlacesServiceStatus.OK) {
-	       	console.log(results);
+	       	//console.log(results);
 	       	restaurantObject = results;
 	       	for (var i = 0; i < 4; i++) {
 	       		var subsection = $("<div>");
@@ -121,10 +120,9 @@ $(document).ready(function() {
 
 	// Gracenote API for movies near a certain zipcode, for today...
 	$("#movieImage").on("click", function() {
-		var movieChosen = true;
+		movieChosen = true;
 		var date = moment().format("YYYY-MM-DD");
-		var apiKey = "zephc9snecc3dpg2eh66m4ng";
-		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + location + "&api_key=" + apiKey;
+		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + location + "&api_key=" + movieAPIkey;
 		$.ajax({
 			url: gracenoteQueryURL,
 			method: "GET"
@@ -144,7 +142,7 @@ $(document).ready(function() {
 		});
 	});
 
-	// Renders list of movies or  and data persistance for movies/ events...
+	// Renders list of movies or events and data persistance for movies/ events...
 	$(document).on("click", ".userChoice", function() {
 		if (movieChosen) {
 			for (var i = 0; i < movieObject.length; i++) {
@@ -198,13 +196,11 @@ $(document).ready(function() {
 						event: eventObject.events[prop].name.html
 					});
 				};
-<<<<<<< HEAD
-=======
 			}
 		}
 	});
 
-	// Allows user to return to movie list...
+	// Allows user to return to movie list or event...
 	$(document).on("click", "#goBackButton", function() {
 		if (movieChosen) {
 			$("#movieEventHolder").empty();
@@ -232,12 +228,10 @@ $(document).ready(function() {
 				title.html(eventObject.events[prop].name.html);
 				subsection.html(title);
 				$("#movieEventHolder").append(subsection);
->>>>>>> bf1cf12a545053364e511fc5f5fcdebce2ab5926
 			}
 		}
 	});
 
-<<<<<<< HEAD
 	// Allows user to return to movie list...
 	$(document).on("click", "#goBackButton", function() {
 		$("#movieEventHolder").empty();
@@ -250,7 +244,7 @@ $(document).ready(function() {
 			subsection.append(title);
 			$("#movieEventHolder").append(subsection);
 		};
-=======
+
 	// Restaurant data persistance on click...
 	$(document).on("click", ".restaurant", function() {
 		for (var i = 0; i < restaurantObject.length; i++) {
@@ -274,7 +268,6 @@ $(document).ready(function() {
 	       		});
 			}
 		}
->>>>>>> bf1cf12a545053364e511fc5f5fcdebce2ab5926
 	});
 
 	// Restaurant data persistance on click...
@@ -306,21 +299,17 @@ $(document).ready(function() {
 	// Initial load of data when clicking event panel
 	$("#eventImage").on("click", function() {
     	//var date = "&date_modified.keyword=this_week";
-<<<<<<< HEAD
-
-=======
->>>>>>> bf1cf12a545053364e511fc5f5fcdebce2ab5926
-    	var movieChosen = false;
+    	movieChosen = false;
     	var apiKey = "&token=WJ5ZSOV6TV56IC44E7EJ";
     	var location = "?location.address=44144";
     	var eventBriteQueryURL = "https://www.eventbriteapi.com/v3/events/search/" + location + apiKey;
-			console.log(eventBriteQueryURL);
+		//console.log(eventBriteQueryURL);
     	$.ajax({
     		url: eventBriteQueryURL,
     		method: "GET"
     	}).done(function(eventBriteResponse) {
     		eventObject = eventBriteResponse;
-    		console.log(eventObject);
+    		//console.log(eventObject);
     		var display = $("<div>");
     		display.html("Displaying events in " + eventObject.location.augmented_location.city + ", " + eventObject.location.augmented_location.region);
     		$("#movieEventHolder").html(display);
@@ -339,34 +328,56 @@ $(document).ready(function() {
 	//location query function
 	$('#zipCode').click(function(){
 	    var zipCode = $('#enteredZipCode').val();
-	    console.log(zipCode);
+	    //console.log(zipCode);
 		//var enteredName = document.getElementById('enteredFormName').value.replace(' ', '+');
 	    if (zipCode.length != 5) {
 	    	$('#movieEventHolder').html("Invalid zip code");
 	    }
 	    else {
-	    	var display = $("<div>");
-	    	display.html("Displaying events around " + eventObject.location.augmented_location.city + ", " + eventObject.location.augmented_location.region);
-		    $("#movieEventHolder").html(display);
-		    //Ajax Request
-		    var queryURL = "https://www.eventbriteapi.com/v3/events/search/?token=WJ5ZSOV6TV56IC44E7EJ&location.address=" + zipCode;
-		    $.ajax({
-		    	url: queryURL,
-		    	method: "GET"
-		    }).done(function (event) {
-		    	for (var prop in eventObject.events) {
-		    		//console.log( eventObject.events[prop].name.html );
-		    		var subsection = $("<div>");
-		    		var title = $("<div>");
-		    		subsection.addClass("userChoice");
-		    		subsection.attr("data-name", eventObject.events[prop].name.html);
-		    		title.html(eventObject.events[prop].name.html);
-		    		subsection.html(title);
-		    		$("#movieEventHolder").append(subsection);
-		    	}
-		    });
+	    	if (movieChosen) {
+	    		var date = moment().format("YYYY-MM-DD");
+	    		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + zipCode + "&api_key=" + movieAPIkey;
+	    		$.ajax({
+	    			url: gracenoteQueryURL,
+	    			method: "GET"
+	    		}).done(function(gracenoteResponse) {
+	    			movieObject = gracenoteResponse;
+	    			//console.log(movieObject);
+
+	    			for (var i = 0; i < gracenoteResponse.length; i++) {
+	    				var subsection = $("<div>");
+	    				var title = $("<p>");
+	    				subsection.addClass("userChoice");
+	    				subsection.attr("data-name", gracenoteResponse[i].title);
+	    				title.html(gracenoteResponse[i].title);
+	    				subsection.append(title);
+	    				$("#movieEventHolder").append(subsection);
+	    			};
+	    		});
+	    	}
+			else {
+			    //Ajax Request
+			    var queryURL = "https://www.eventbriteapi.com/v3/events/search/?token=WJ5ZSOV6TV56IC44E7EJ&location.address=" + zipCode;
+			    $.ajax({
+			    	url: queryURL,
+			    	method: "GET"
+			    }).done(function (eventResponse) {
+			    	eventObject = eventResponse;
+			    	var display = $("<div>");
+			    	display.html("Displaying events around " + eventObject.location.augmented_location.city + ", " + eventObject.location.augmented_location.region);
+			    	$("#movieEventHolder").html(display);
+			    	for (var prop in eventObject.events) {
+			    		var subsection = $("<div>");
+			    		var title = $("<div>");
+			    		subsection.addClass("userChoice");
+			    		subsection.attr("data-name", eventObject.events[prop].name.html);
+			    		title.html(eventObject.events[prop].name.html);
+			    		subsection.html(title);
+			    		$("#movieEventHolder").append(subsection);
+			    	}
+			    });
+			}
 		};
-	//closing if/else statement
 	});
 
 });

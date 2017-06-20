@@ -12,10 +12,17 @@ var restaurantChoice = $(".restaurant");
 var userChoice = $(".userChoice");
 var restaurantDiv = $("#food");
 
-
 // On load for site
-TweenMax.from(logo, 2, {ease: Back.easeOut.config(2), x: -1000});
+TweenMax.from(logo, 2, {ease: Back.easeOut.config(2), x: -1000, onStart: hide2ndPage});
 TweenMax.from([perfectButton, buttonText], 2, {autoAlpha: 0, rotation: 360, delay: 1.5});// Spins button and text
+
+function hide2ndPage(){
+	$(".container").hide();
+};
+
+function show2ndPage(){
+	$(".container").show();
+};
 
 // Image enlarge on hover
 movieImage.hover(function() {
@@ -43,7 +50,7 @@ eventImage.hover(function() {
 function click() {
 	TweenMax.to(movieImage, 1, {x:-1200, ease:Linear.easeNone, rotation: 360, force3D:true, onComplete: hideOpeningPage, onStart: hideRestaurantDiv});
 	TweenMax.to(eventImage, 1, {x:1200, ease:Linear.easeNone, rotation: -360, force3D:true});
-	TweenMax.to(logo, 1, {x: -980, y: -270, rotation: 360, scale:0.35});// Moves logo
+	TweenMax.to(logo, 1, {x: -680, y: -270, rotation: 360, scale:0.35});// Moves logo
 	TweenMax.to([perfectButton, buttonText], 1, {autoAlpha: 0});// Removes button and text
 };
 

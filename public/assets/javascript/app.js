@@ -90,22 +90,23 @@ $(document).ready(function() {
 				service = new google.maps.places.PlacesService(map);
 				service.nearbySearch(request, callback);
 				//reverse geocoding to obtain zip code
-				var zipCodeURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + posLat + "," + posLng + "&sensor=true";
-			  	//console.log(zipCodeURL);
-				$.ajax({
-					url: zipCodeURL,
-					method: "GET"
-				}).done(function(response) {
-					var searchKey = "postal_code";
-					for (var i = 0; i < response.results[0].address_components.length; i++) {
-					    var thisAddressObject = response.results[0].address_components[i];
-					    var addressTypes = thisAddressObject.types;
-					    var search = addressTypes.indexOf(searchKey);
-					    if (search > -1) {
-					        zipCode = thisAddressObject.short_name;
-					        break;
-					    }
-					};
+				var geocoder = new google.maps.Geocoder;
+				geocoder.geocode({'location': pos}, function(response, status) {
+					if (status === 'OK') {
+						var searchKey = "postal_code";
+						for (var i = 0; i < response[0].address_components.length; i++) {
+						    var thisAddressObject = response[0].address_components[i];
+						    var addressTypes = thisAddressObject.types;
+						    var search = addressTypes.indexOf(searchKey);
+						    if (search > -1) {
+						        zipCode = thisAddressObject.short_name;
+						        break;
+						    }
+						};
+					}
+					else {
+						console.log("Geocoder failed due to: " + status);
+					}
 				});
 			}, function() {
 				handleLocationError(true, infoWindow, map.getCenter());

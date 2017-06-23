@@ -29,10 +29,11 @@ $(document).ready(function() {
 	var service;
 	var infowindow;
 	var marker;
-	var zipCodeObject;
+	var zipcodeObject;
 	var posLat;
 	var posLng;
 	var zipCode;
+	var pos;
 
 	database.ref('/movieList').once("value", function(snapshot) {
 		var movieList = snapshot.val();
@@ -71,39 +72,41 @@ $(document).ready(function() {
 			navigator.geolocation.getCurrentPosition(function(position) {
 				posLat = position.coords.latitude;
 				posLng = position.coords.longitude;
-				console.log(posLat);
-				console.log(posLng);
+				pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+				mapCenter = new google.maps.LatLng(posLat,posLng);
+				map = new google.maps.Map(document.getElementById("mapHolder"), {
+					center: mapCenter,
+					zoom: 13
+				});
+				// use position to find restaurants
+				var request = {
+					location: mapCenter,
+					radius: '1000',
+					type: ['restaurant']
+				};
+				service = new google.maps.places.PlacesService(map);
+				service.nearbySearch(request, callback);
 				//reverse geocoding to obtain zip code
-				var zipCodeURL = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + posLat + "," + posLng + "&sensor=true";
+				var zipCodeURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + posLat + "," + posLng + "&sensor=true";
 			  	//console.log(zipCodeURL);
 				$.ajax({
 					url: zipCodeURL,
 					method: "GET"
-				}).done(function(zipCodeResponse) {
-					zipCodeObject = zipCodeResponse;
-					zipCode = zipCodeObject.results[2].address_components[0].short_name;
-					//console.log(zipCode);
-					//console.log(zipCodeObject);
-					//console.log(zipCodeObject.results["0"].address_components[7].long_name);
-					mapCenter = new google.maps.LatLng(posLat,posLng);
-					map = new google.maps.Map(document.getElementById("mapHolder"), {
-						center: mapCenter,
-						zoom: 13
-					});
-					var request = {
-						location: mapCenter,
-						radius: '1000',
-						type: ['restaurant']
+				}).done(function(response) {
+					var searchKey = "postal_code";
+					for (var i = 0; i < response.results[0].address_components.length; i++) {
+					    var thisAddressObject = response.results[0].address_components[i];
+					    var addressTypes = thisAddressObject.types;
+					    var search = addressTypes.indexOf(searchKey);
+					    if (search > -1) {
+					        zipCode = thisAddressObject.short_name;
+					        break;
+					    }
 					};
-
-					service = new google.maps.places.PlacesService(map);
-					service.nearbySearch(request, callback);
 				});
-				var pos = {
-					lat: position.coords.latitude,
-					lng: position.coords.longitude
-				};
-				console.log(pos);
 			}, function() {
 				handleLocationError(true, infoWindow, map.getCenter());
 			});
@@ -116,9 +119,7 @@ $(document).ready(function() {
 
 	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 		infoWindow.setPosition(pos);
-		infoWindow.setContent(browserHasGeolocation ?
-													'Error: The Geolocation service failed.' :
-													'Error: Your browser doesn\'t support geolocation.');
+		infoWindow.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.':'Error: Your browser doesn\'t support geolocation.');
 		infoWindow.open(map);
 	};
 
@@ -134,10 +135,10 @@ $(document).ready(function() {
 	       		var restaurantRating = $("<p>");
 	       		subsection.attr("id", "restaurantResult");
 	       		subsection.addClass("restaurant");
-	       		subsection.attr("data-name", results[i].name);
-	       		restaurantName.html(results[i].name);
-	       		restaurantPrice.html("Price Level: " + results[i].price_level + " out of 4");
-	       		restaurantRating.html("Rating: " + results[i].rating + " / 5.0");
+	       		subsection.attr("data-name", restaurantObject[i].name);
+	       		restaurantName.html(restaurantObject[i].name);
+	       		restaurantPrice.html("Price Level: " + restaurantObject[i].price_level + " out of 4");
+	       		restaurantRating.html("Rating: " + restaurantObject[i].rating + " / 5.0");
 	       		subsection.append(restaurantName);
 	       		subsection.append(restaurantPrice);
 	       		subsection.append(restaurantRating);
@@ -152,7 +153,7 @@ $(document).ready(function() {
 	$("#movieImage").on("click", function() {
 		movieChosen = true;
 		var date = moment().format("YYYY-MM-DD");
-		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + zipCode + "&api_key=" + movieAPIkey;
+		var gracenoteQueryURL = "https://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + zipCode + "&api_key=" + movieAPIkey;
 		$.ajax({
 			url: gracenoteQueryURL,
 			method: "GET"
@@ -351,7 +352,7 @@ $(document).ready(function() {
 	    else {
 	    	if (movieChosen) {
 	    		var date = moment().format("YYYY-MM-DD");
-	    		var gracenoteQueryURL = "http://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + zipCodeManual + "&api_key=" + movieAPIkey;
+	    		var gracenoteQueryURL = "https://data.tmsapi.com/v1.1/movies/showings" + "?startDate=" + date + "&zip=" + zipCodeManual + "&api_key=" + movieAPIkey;
 	    		$.ajax({
 	    			url: gracenoteQueryURL,
 	    			method: "GET"

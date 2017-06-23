@@ -1,65 +1,144 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en-us">
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+    <title>Perfect Date</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:400,600" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" text="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" text="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style2.css">
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/4.1.2/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/4.1.2/firebase-auth.js"></script>
-    <script defer src="/__/firebase/4.1.2/firebase-database.js"></script>
-    <script defer src="/__/firebase/4.1.2/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/4.1.2/firebase-storage.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
-
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+<body>
+    <!--Top Header For Logo and Opening Page-->
+    <div class="container-fluid">
+        <div>
+            <img id="headerLogo" src="assets/images/Perfect_Date_Logo.png">
+        </div>
+        <div id="openingPage">
+            <!--Perfect My Date-->
+            <p class="textAbovePerfectButton">Let us set up your Perfect Date</p>
+            <button type="button" id="perfectButton" class="btn btn-default">Perfect My Date!</button>
+            <!--Animated Images for Home Screen -->
+            <div class="mobileImage" id="loadImages">
+                <img id="movieImage" src="assets/images/theater_mainImage.png">
+                <img id="eventImage" src="assets/images/concertEvent_mainImage.png">
+            </div>
+        </div>
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    <!--Main Page After Click Event-->
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="row searchCriteria">
+            <div class="col-md-12">
+                <div class="row">
+                    <!-- Forms for Searching Criteria -->
+                    <form class="navbar-form">
+                        <div class="col-md-4 searchContainer">
+                            <div class="formText">
+                                <p>Movie Title:</p>
+                            </div>
+                            <br>
+                            <input type="text" name="name">
+                            <button type="button" class="btn btn-default">Submit</button>
+                        </div>
+                        <div class="col-md-4 searchContainer">
+                            <div class="formText">
+                                <p>Event:</p>
+                            </div>
+                            <br>
+                            <input type="text" name="name">
+                            <button type="button" class="btn btn-default">Submit</button>
+                        </div>
+                        <div class="col-md-4 searchContainer">
+                            <div class="formText">
+                                <p>Zip Code/Location:</p>
+                            </div>
+                            <br>
+                            <input type="text" name="location" id="enteredZipCode">
+                            <button type="button" class="btn btn-default submit" id="zipCode">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!--End of Nav-->
+    <!--Movie/Event Form and Display-->
+    <div class="row mainContainer">
+        <div class="col-md-6">
+            <!--This is where the Movies/Events will display-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Movies/Events</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="movieEventHolder">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--This is where the Map will be displayed-->
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Map of Locations</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="mapHolder">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End of Display-->
+    <!--Restaurants-->
+    <div class="row footer">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default" id="food">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Restaurants</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="restaurantList">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!--End Of Container-->
+    <!-- Greensock script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/javascript/app.js"></script>
+    <script src="assets/javascript/animation.js"></script>
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <!-- Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOKhxps5svUAaZ1Q0ruXbKG8Agm9qAt5A&libraries=places"></script>
+</body>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          let app = firebase.app();
-          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
-          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
 </html>
